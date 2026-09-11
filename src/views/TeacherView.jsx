@@ -18,11 +18,12 @@ import {
   Clock,
   HeartPulse
 } from 'lucide-react'
-import { TOPICS_DETAIL, AI_FUTURE_SUMMARY } from '../data/workshopData'
+import { TOPICS_DETAIL } from '../data/workshopData'
 import FamilyAiKnowledgeCard from '../components/FamilyAiKnowledgeCard'
+import AiOverviewSection from '../components/AiOverviewSection'
 
 export default function TeacherView({ fontSizes }) {
-  const [currentTab, setCurrentTab] = useState('slides') // 'slides', 'intro', 'curriculum', 'tutor', 'family', 'future'
+  const [currentTab, setCurrentTab] = useState('slides') // 'slides', 'intro', 'curriculum', 'tutor', 'overview', 'family'
   const [currentTopicId, setCurrentTopicId] = useState(1)
   const [copiedKey, setCopiedKey] = useState(null)
 
@@ -108,6 +109,18 @@ export default function TeacherView({ fontSizes }) {
 
           {/* Reference & Knowledge Base Tabs */}
           <button
+            onClick={() => setCurrentTab('overview')}
+            className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition ${
+              currentTab === 'overview'
+                ? 'bg-emerald-600 text-white font-bold shadow-sm'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+            }`}
+          >
+            <Sparkles className="w-4 h-4" />
+            <span>5. 6 เสาหลักความรู้ AI 🌟</span>
+          </button>
+
+          <button
             onClick={() => setCurrentTab('family')}
             className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition ${
               currentTab === 'family'
@@ -116,19 +129,7 @@ export default function TeacherView({ fontSizes }) {
             }`}
           >
             <HeartPulse className="w-4 h-4" />
-            <span>5. คลังความรู้ AI ในครอบครัว 🏠</span>
-          </button>
-
-          <button
-            onClick={() => setCurrentTab('future')}
-            className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition ${
-              currentTab === 'future'
-                ? 'bg-emerald-600 text-white font-bold shadow-sm'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
-            }`}
-          >
-            <TrendingUp className="w-4 h-4" />
-            <span>6. AI ทำอะไรได้ & อนาคต 🔮</span>
+            <span>6. คลังความรู้ AI ในครอบครัว 🏠</span>
           </button>
         </div>
 
@@ -139,20 +140,40 @@ export default function TeacherView({ fontSizes }) {
 
       {/* TAB 1: SLIDE PRESENTATION MODE */}
       {currentTab === 'slides' && (
-        <div className="space-y-5">
-          {/* Topic Selector Tabs */}
-          <div className="flex items-center space-x-1.5 overflow-x-auto pb-1 custom-scrollbar">
+        <div className="space-y-4 animate-fadeIn">
+          {/* Slide Navigation Header */}
+          <div className="flex items-center justify-between bg-[#131b2e] p-2 rounded-xl border border-slate-800">
+            <div className="flex items-center space-x-2">
+              <span className="text-xs text-slate-400 font-medium">เลือกหัวข้อสไลด์:</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <span className="text-xs font-mono text-slate-400 bg-slate-800 px-2 py-0.5 rounded">
+                หัวข้อ {currentTopicId} / {TOPICS_DETAIL.length}
+              </span>
+            </div>
+          </div>
+
+          {/* Quick Topic Jump Buttons */}
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
             {TOPICS_DETAIL.map((t) => (
               <button
                 key={t.id}
                 onClick={() => setCurrentTopicId(t.id)}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition ${
+                className={`p-2.5 rounded-xl border text-left text-xs transition flex items-center justify-between ${
                   currentTopicId === t.id
                     ? 'bg-sky-600 text-white font-bold shadow-sm'
                     : 'minimal-card text-slate-400 hover:text-slate-200'
                 }`}
               >
-                <span>หัวข้อ {t.id}</span>
+                <div>
+                  <span className="font-bold block text-white">หัวข้อ {t.id}</span>
+                  <span className="text-[10px] opacity-80 truncate block max-w-[120px]">{t.title}</span>
+                </div>
+                {currentTopicId === t.id ? (
+                  <Check className="w-3.5 h-3.5" />
+                ) : (
+                  <ArrowRight className="w-3 h-3 opacity-40" />
+                )}
               </button>
             ))}
           </div>
@@ -271,99 +292,21 @@ export default function TeacherView({ fontSizes }) {
         </div>
       )}
 
-      {/* TAB 2: FAMILY & DAILY LIFE AI KNOWLEDGE */}
+      {/* TAB 5: AI 6 PILLARS OVERVIEW */}
+      {currentTab === 'overview' && (
+        <div className="animate-fadeIn">
+          <AiOverviewSection fontSizes={fontSizes} />
+        </div>
+      )}
+
+      {/* TAB 6: FAMILY & DAILY LIFE AI KNOWLEDGE */}
       {currentTab === 'family' && (
         <div className="animate-fadeIn">
           <FamilyAiKnowledgeCard fontSizes={fontSizes} />
         </div>
       )}
 
-      {/* TAB 3: AI CAPABILITIES & FUTURE OUTLOOK */}
-      {currentTab === 'future' && (
-        <div className="space-y-6 animate-fadeIn">
-          {/* Section 1: What AI Can Do */}
-          <div className="minimal-card rounded-2xl p-6 lg:p-7 space-y-4">
-            <div className="flex items-center space-x-2 text-sky-400">
-              <Sparkles className="w-5 h-5" />
-              <h3 className="text-lg font-bold text-white">1. ปัจจุบัน AI ทำอะไรได้บ้าง?</h3>
-            </div>
-            <p className="text-xs text-slate-400">สรุปความสามารถหลัก 3 ด้านที่เข้ามาเปลี่ยนโลกการเรียน การทำงาน และการสร้างสรรค์</p>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
-              {AI_FUTURE_SUMMARY.whatAiCanDo.map((cat, idx) => (
-                <div key={idx} className="minimal-card-inner p-4 rounded-xl space-y-2.5">
-                  <h4 className="font-bold text-white text-sm">{cat.category}</h4>
-                  <ul className="text-xs text-slate-300 space-y-1.5 list-disc list-inside leading-relaxed">
-                    {cat.items.map((item, iIdx) => (
-                      <li key={iIdx}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Section 2: How AI Helps Us */}
-          <div className="minimal-card rounded-2xl p-6 lg:p-7 space-y-4">
-            <div className="flex items-center space-x-2 text-emerald-400">
-              <Zap className="w-5 h-5" />
-              <h3 className="text-lg font-bold text-white">2. AI ช่วยอะไรเราได้บ้างในชีวิตจริง?</h3>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {AI_FUTURE_SUMMARY.howItHelpsUs.map((benefit, idx) => (
-                <div key={idx} className="minimal-card-inner p-4 rounded-xl space-y-1.5">
-                  <h4 className="font-bold text-white text-sm">{benefit.title}</h4>
-                  <p className="text-xs text-slate-300 leading-relaxed">{benefit.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Section 3: Future Roadmap (3 - 5 - 10 Years) */}
-          <div className="minimal-card rounded-2xl p-6 lg:p-7 space-y-5">
-            <div className="flex items-center space-x-2 text-sky-400">
-              <TrendingUp className="w-5 h-5" />
-              <h3 className="text-lg font-bold text-white">3. อนาคตอีก 3 - 5 - 10 ปีข้างหน้า AI จะเป็นอย่างไร?</h3>
-            </div>
-            <p className="text-xs text-slate-400">ทิศทางวิวัฒนาการของเทคโนโลยี AI และสิ่งที่คนทั่วไปต้องเตรียมตัวรับมือ</p>
-
-            <div className="space-y-4">
-              {AI_FUTURE_SUMMARY.futureRoadmap.map((road, idx) => (
-                <div key={idx} className="minimal-card-inner p-5 rounded-xl border border-slate-800 space-y-2">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-slate-800 text-sky-300 border border-slate-700">
-                      {road.timeline}
-                    </span>
-                    <h4 className="text-sm sm:text-base font-bold text-white">{road.title}</h4>
-                  </div>
-                  <ul className="text-xs text-slate-300 space-y-1.5 list-disc list-inside leading-relaxed pt-1">
-                    {road.points.map((pt, pIdx) => (
-                      <li key={pIdx}>{pt}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-
-            {/* Key Quote Box */}
-            <div className="p-4 rounded-xl bg-[#060911] border border-slate-700 text-center">
-              <p className="text-sm sm:text-base font-bold text-sky-300">
-                "{AI_FUTURE_SUMMARY.keyQuote}"
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* TAB 4: FAMILY & DAILY LIFE AI KNOWLEDGE */}
-      {currentTab === 'family' && (
-        <div className="animate-fadeIn">
-          <FamilyAiKnowledgeCard fontSizes={fontSizes} />
-        </div>
-      )}
-
-      {/* TAB 5: INTRO SPEECH */}
+      {/* TAB 2: INTRO SPEECH */}
       {currentTab === 'intro' && (
         <div className="minimal-card rounded-2xl p-6 lg:p-8 space-y-6">
           <div className="space-y-1">

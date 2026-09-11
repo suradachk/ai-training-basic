@@ -13,11 +13,12 @@ import {
   Copy,
   HeartPulse
 } from 'lucide-react'
-import { TOPICS_DETAIL, PROMPT_TEMPLATES, PROJECT_IDEAS, AI_FUTURE_SUMMARY } from '../data/workshopData'
+import { TOPICS_DETAIL, PROMPT_TEMPLATES, PROJECT_IDEAS } from '../data/workshopData'
 import FamilyAiKnowledgeCard from '../components/FamilyAiKnowledgeCard'
+import AiOverviewSection from '../components/AiOverviewSection'
 
 export default function StudentView({ fontSizes }) {
-  const [currentTab, setCurrentTab] = useState('notes') // 'notes', 'builder', 'prompts', 'projects', 'debug', 'family', 'future'
+  const [currentTab, setCurrentTab] = useState('notes') // 'notes', 'builder', 'prompts', 'projects', 'debug', 'overview', 'family'
   const [copiedKey, setCopiedKey] = useState(null)
 
   // Interactive Prompt Builder
@@ -126,6 +127,18 @@ export default function StudentView({ fontSizes }) {
 
         {/* Reference & Knowledge Base Tabs at the End */}
         <button
+          onClick={() => setCurrentTab('overview')}
+          className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition whitespace-nowrap ${
+            currentTab === 'overview'
+              ? 'bg-emerald-600 text-white font-bold shadow-sm'
+              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+          }`}
+        >
+          <Sparkles className="w-4 h-4" />
+          <span>6. 6 เสาหลักความรู้ AI 🌟</span>
+        </button>
+
+        <button
           onClick={() => setCurrentTab('family')}
           className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition whitespace-nowrap ${
             currentTab === 'family'
@@ -134,104 +147,21 @@ export default function StudentView({ fontSizes }) {
           }`}
         >
           <HeartPulse className="w-4 h-4" />
-          <span>6. คลังความรู้ AI ในครอบครัว 🏠</span>
-        </button>
-
-        <button
-          onClick={() => setCurrentTab('future')}
-          className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition whitespace-nowrap ${
-            currentTab === 'future'
-              ? 'bg-emerald-600 text-white font-bold shadow-sm'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
-          }`}
-        >
-          <TrendingUp className="w-4 h-4" />
-          <span>7. AI ทำอะไรได้ & อนาคต 🔮</span>
+          <span>7. คลังความรู้ AI ในครอบครัว 🏠</span>
         </button>
       </div>
 
-      {/* TAB 1: FAMILY & DAILY LIFE AI KNOWLEDGE */}
-      {currentTab === 'family' && (
+      {/* TAB 6: AI 6 PILLARS OVERVIEW */}
+      {currentTab === 'overview' && (
         <div className="animate-fadeIn">
-          <FamilyAiKnowledgeCard fontSizes={fontSizes} />
+          <AiOverviewSection fontSizes={fontSizes} />
         </div>
       )}
 
-      {/* TAB 2: AI CAPABILITIES & FUTURE ROADMAP */}
-      {currentTab === 'future' && (
-        <div className="space-y-6 animate-fadeIn">
-          {/* Section 1: What AI Can Do */}
-          <div className="minimal-card rounded-2xl p-6 space-y-4">
-            <div className="flex items-center space-x-2 text-sky-400">
-              <Sparkles className="w-5 h-5" />
-              <h3 className="text-lg font-bold text-white">1. ตอนนี้ AI ทำอะไรให้เราได้บ้าง?</h3>
-            </div>
-            <p className="text-xs text-slate-400">ตัวอย่างการใช้งานจริงที่ช่วยประหยัดเวลาในชีวิตประจำวัน</p>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
-              {AI_FUTURE_SUMMARY.whatAiCanDo.map((cat, idx) => (
-                <div key={idx} className="minimal-card-inner p-4 rounded-xl space-y-2">
-                  <h4 className="font-bold text-white text-sm">{cat.category}</h4>
-                  <ul className="text-xs text-slate-300 space-y-1.5 list-disc list-inside leading-relaxed">
-                    {cat.items.map((item, iIdx) => (
-                      <li key={iIdx}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Section 2: How It Helps Us */}
-          <div className="minimal-card rounded-2xl p-6 space-y-4">
-            <div className="flex items-center space-x-2 text-emerald-400">
-              <Zap className="w-5 h-5" />
-              <h3 className="text-lg font-bold text-white">2. ประโยชน์สำคัญที่ AI ช่วยเราได้ทันที</h3>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {AI_FUTURE_SUMMARY.howItHelpsUs.map((benefit, idx) => (
-                <div key={idx} className="minimal-card-inner p-4 rounded-xl space-y-1.5">
-                  <h4 className="font-bold text-white text-sm">{benefit.title}</h4>
-                  <p className="text-xs text-slate-300 leading-relaxed">{benefit.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Section 3: Future Roadmap */}
-          <div className="minimal-card rounded-2xl p-6 space-y-5">
-            <div className="flex items-center space-x-2 text-sky-400">
-              <TrendingUp className="w-5 h-5" />
-              <h3 className="text-lg font-bold text-white">3. อนาคตอีก 3 - 5 - 10 ปีข้างหน้า AI จะเป็นยังไง?</h3>
-            </div>
-            <p className="text-xs text-slate-400">รู้ทันอนาคต เตรียมตัวปรับใช้เทคโนโลยีให้ชีวิตและการเรียนก้าวกระโดด</p>
-
-            <div className="space-y-4">
-              {AI_FUTURE_SUMMARY.futureRoadmap.map((road, idx) => (
-                <div key={idx} className="minimal-card-inner p-5 rounded-xl border border-slate-800 space-y-2">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-slate-800 text-sky-300 border border-slate-700">
-                      {road.timeline}
-                    </span>
-                    <h4 className="text-sm sm:text-base font-bold text-white">{road.title}</h4>
-                  </div>
-                  <ul className="text-xs text-slate-300 space-y-1.5 list-disc list-inside leading-relaxed pt-1">
-                    {road.points.map((pt, pIdx) => (
-                      <li key={pIdx}>{pt}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-
-            {/* Key Quote Box */}
-            <div className="p-4 rounded-xl bg-[#060911] border border-slate-700 text-center">
-              <p className="text-sm sm:text-base font-bold text-sky-300">
-                "{AI_FUTURE_SUMMARY.keyQuote}"
-              </p>
-            </div>
-          </div>
+      {/* TAB 7: FAMILY & DAILY LIFE AI KNOWLEDGE */}
+      {currentTab === 'family' && (
+        <div className="animate-fadeIn">
+          <FamilyAiKnowledgeCard fontSizes={fontSizes} />
         </div>
       )}
 
