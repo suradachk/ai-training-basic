@@ -13,10 +13,8 @@ import {
   Globe2,
   ShieldCheck,
   HeartHandshake,
-  Lightbulb,
-  CheckCircle2,
-  TrendingUp,
-  Cpu
+  Heart,
+  Smile
 } from 'lucide-react'
 
 export default function HomeView({ fontSizes }) {
@@ -24,51 +22,51 @@ export default function HomeView({ fontSizes }) {
     {
       icon: Globe2,
       color: "text-sky-400 bg-sky-950/60 border-sky-500/30",
-      title: "1. โลกอนาคตจะขับเคลื่อนด้วย AI ทั้งหมด",
-      desc: "เหมือนยุคที่ 'ไฟฟ้า' หรือ 'สมาร์ตโฟน' เข้ามาเปลี่ยนโลก AI จะฝังอยู่ในทุกมิติ ทั้งการเรียน การทำงาน การแพทย์ และชีวิตประจำวัน การเข้าใจ AI ในวันนี้จึงไม่ใช่ทางเลือก แต่คือทักษะชีวิตพื้นฐาน"
+      title: "1. อีกหน่อยทุกอย่างรอบตัวจะมี AI หมดเลย",
+      desc: "เหมือนตอนที่จู่ๆ ทุกคนก็ต้องหัดใช้สมาร์ตโฟน โทรคุยวิดีโอกับลูกหลาน หรือสั่งของออนไลน์... อีกไม่กี่ปี AI จะไปอยู่ในมือถือ ทีวี ตู้เย็น รถยนต์ และที่ทำงาน ถ้าเราเริ่มคุยกับมันเป็นตั้งแต่ตอนนี้ จะทำอะไรก็ง่ายไปหมด"
     },
     {
       icon: Zap,
       color: "text-amber-400 bg-amber-950/60 border-amber-500/30",
-      title: "2. เปลี่ยนจาก 'ผู้ลงแรง' เป็น 'ผู้กำกับ' (Director)",
-      desc: "AI ไม่ได้มาแย่งงาน แต่มาเป็น 'เด็กฝึกงานอัจฉริยะ' ที่ช่วยย่นเวลางาน 8 ชั่วโมงให้เหลือ 15 นาที ขยายพลัง (Superpowers) ให้เราสร้างผลงานระดับมือโปรได้ แม้ไม่มีพื้นฐานมาก่อน"
+      title: "2. มี 'เด็กฝึกงานรู้ทุกเรื่อง' คอยช่วยงานเรา",
+      desc: "AI ไม่ได้มาแย่งอะไรเราไป แต่มันเหมือนผู้ช่วยรู้ใจที่สั่งอะไรก็ทำ งานที่เคยนั่งหลังขดหลังแข็งทำ 5-6 ชั่วโมง (พิมพ์เอกสาร, คิดเมนู, สรุปข้อมูล) ให้ AI ช่วยทำแป๊บเดียวเสร็จ เราจะได้มีเวลาไปพักผ่อน อยู่กับคนที่เรารัก"
     },
     {
       icon: ShieldCheck,
       color: "text-emerald-400 bg-emerald-950/60 border-emerald-500/30",
-      title: "3. สร้างภูมิคุ้มกัน ไม่ตกเป็นเหยื่อของเทคโนโลยี",
-      desc: "ในยุคที่ข่าวปลอม ข้อมูลบิดเบือน และกลโกงไซเบอร์แพร่หลาย คนที่เข้าใจกลไก AI จะมีวิจารณญาณ รู้จัก Fact-Check และใช้งานอย่างปลอดภัยและมีจริยธรรม"
+      title: "3. ปลอดภัย รู้ทัน ไม่โดนแก๊งมิจฉาชีพหลอก",
+      desc: "ทุกวันนี้มีทั้งข่าวปลอมแชร์ใน LINE ลิงก์หลอกโอนเงิน และคลิปเสียงปลอมจากแก๊งคอลเซ็นเตอร์... ถ้าเราเข้าใจว่า AI ทำงานยังไง เราจะเช็กความจริงเป็น ไม่ตกใจ ไม่หลงเชื่ออะไรง่ายๆ ปลอดภัยสบายใจทั้งบ้าน"
     },
     {
       icon: HeartHandshake,
       color: "text-rose-400 bg-rose-950/60 border-rose-500/30",
-      title: "4. ไม่ทิ้งใครไว้ข้างหลัง เติบโตไปด้วยกันทั้งครอบครัว",
-      desc: "เด็กๆ มีติวเตอร์ส่วนตัว 24 ชม., วัยทำงานลดความเหนื่อยล้า, ผู้สูงอายุเข้าใจผลสุขภาพและดูแลตัวเองได้ ทุกคนในบ้านสื่อสารภาษาเดียวกันและก้าวทันโลกไปพร้อมกัน"
+      title: "4. สบายขึ้น เก่งขึ้น ไปด้วยกันทั้งบ้าน",
+      desc: "ลูกๆ หลานๆ มีติวเตอร์ใจดีคอยอธิบายการบ้านให้เข้าใจง่ายๆ, คนทำงานเหนื่อยน้อยลง, คุณพ่อคุณแม่ตรวจผลสุขภาพและหาข้อมูลดูแลตัวเองได้ ทุกคนในบ้านคุยภาษาเดียวกันและก้าวทันโลกไปพร้อมกัน"
     }
   ]
 
   return (
-    <div className="max-w-5xl mx-auto py-8 sm:py-12 space-y-12">
+    <div className="max-w-5xl mx-auto py-8 sm:py-12 space-y-12 animate-fadeIn">
       {/* 🌟 HERO MANIFESTO & VISION */}
-      <div className="text-center space-y-5">
+      <div className="text-center space-y-4">
         <div className="inline-flex items-center space-x-2 text-xs font-semibold px-3.5 py-1.5 rounded-full bg-slate-800 text-sky-400 border border-slate-700 shadow-sm">
-          <Sparkles className="w-4 h-4 text-sky-300" />
-          <span>วิสัยทัศน์ & เป้าหมายของหลักสูตร (Our Core Mission)</span>
+          <Smile className="w-4 h-4 text-sky-300" />
+          <span>คุยกันก่อนเริ่ม: ทำไมบ้านเราถึงต้องใช้ AI เป็น?</span>
         </div>
 
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
-          ทำไมทุกคนถึงต้องเข้าใจ AI <br className="hidden sm:inline" />
+          ทำไมพวกเราทุกคนถึงต้อง <br className="hidden sm:inline" />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-cyan-300 to-emerald-400">
-            และใช้งานอย่างมีประสิทธิภาพ?
+            เริ่มใช้ AI กันได้แล้ว?
           </span>
         </h1>
 
         <p className="text-sm sm:text-base text-slate-300 max-w-3xl mx-auto leading-relaxed">
-          เพราะในอนาคตอันใกล้ <strong className="text-white">"ทุกสิ่งรอบตัวเราจะเชื่อมโยงกับ AI ทั้งหมด"</strong> การเรียนรู้และปรับตัวในวันนี้ ไม่ใช่แค่การตามเทคโนโลยีให้ทัน แต่คือการติดอาวุธทางความคิด เพิ่มโอกาสในชีวิต และทำให้เราเป็น <em>"นายของเทคโนโลยี"</em> อย่างแท้จริง
+          เพราะอีกหน่อย <strong className="text-white">"ทุกอย่างรอบตัวเราจะใช้ AI ช่วยหมดเลย"</strong> การเรียนรู้วันนี้ไม่ใช่เรื่องยาก ไม่ต้องมีความรู้คอมพิวเตอร์ลึกซึ้ง แค่พูดคุยภาษาไทยธรรมดา เราก็สามารถมีผู้ช่วยเก่งๆ ไว้ข้างตัว ช่วยให้ชีวิตง่ายขึ้นเยอะครับ!
         </p>
       </div>
 
-      {/* 4 CORE REASONS / PILLARS */}
+      {/* 4 CORE REASONS (ภาษาคนในบ้าน) */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
         {manifestoPoints.map((point, idx) => {
           const Icon = point.icon
@@ -96,10 +94,10 @@ export default function HomeView({ fontSizes }) {
       {/* GOLDEN QUOTE BOX */}
       <div className="minimal-card-inner rounded-2xl p-5 sm:p-6 border border-slate-800 text-center space-y-2 bg-[#060911]/80">
         <span className="text-xs font-mono text-sky-400 uppercase tracking-wider block font-bold">
-          💡 ข้อคิดสำคัญสู่โลกอนาคต
+          💡 สรุปสั้นๆ ให้เห็นภาพ
         </span>
         <p className="text-base sm:text-xl font-bold text-white leading-relaxed">
-          "AI จะไม่ได้มาแทนที่มนุษย์... แต่ <span className="text-sky-300 underline decoration-sky-500/50 underline-offset-4">'มนุษย์ที่เข้าใจและใช้ AI เป็น'</span> จะนำหน้าคนที่ปฏิเสธการเรียนรู้เสมอ"
+          "AI ไม่ได้มาแทนคนเราหรอกครับ... แต่ <span className="text-sky-300 underline decoration-sky-500/50 underline-offset-4">'คนที่ใช้ AI เป็น'</span> จะใช้ชีวิตและทำงานได้สบายกว่าคนที่ไม่ยอมแตะมันเลย"
         </p>
       </div>
 
@@ -108,31 +106,31 @@ export default function HomeView({ fontSizes }) {
         <div className="flex items-center justify-between flex-wrap gap-2 border-b border-slate-800 pb-3">
           <div className="flex items-center space-x-2">
             <Rocket className="w-5 h-5 text-emerald-400" />
-            <h3 className="text-base font-bold text-white">โครงสร้างการเรียนรู้ 2 Sessions ในคอร์สนี้</h3>
+            <h3 className="text-base font-bold text-white">สิ่งที่เราจะได้เรียนรู้ด้วยกันในคอร์สนี้ (2 ช่วงง่ายๆ)</h3>
           </div>
           <span className="text-xs font-mono text-slate-400 bg-slate-800 px-2.5 py-1 rounded">
-            รวมเวลาประมาณ 2.5 ชม.
+            ใช้เวลารวมประมาณ 2 ชม. ครึ่ง
           </span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
           <div className="p-4 rounded-xl bg-[#060911] border border-slate-800 space-y-1.5">
             <div className="flex items-center justify-between">
-              <span className="font-bold text-sky-400">🌟 Session 1: 6 เสาหลักความรู้ AI (30 นาที)</span>
-              <span className="text-[10px] font-mono text-slate-500">Overview</span>
+              <span className="font-bold text-sky-400">🌟 Session 1: คุยสนุกๆ ปูพื้นฐาน 6 เรื่อง AI (30 นาที)</span>
+              <span className="text-[10px] font-mono text-slate-500">ฟังเพลินๆ</span>
             </div>
             <p className="text-slate-300 leading-relaxed">
-              ปูพื้นฐานความเข้าใจ: AI คืออะไร, ทำอะไรได้, ตอนนี้ไปไกลถึงไหน, AI กับชีวิตประจำวัน, AI กับการทำงาน, และอนาคตข้างหน้า
+              มาดูว่า AI คืออะไร ทำอะไรให้เราได้บ้าง ตอนนี้เก่งไปถึงไหนแล้ว และเอามาช่วยงานบ้าน งานประจำวัน หรือช่วยลูกเรียนได้อย่างไร
             </p>
           </div>
 
           <div className="p-4 rounded-xl bg-[#060911] border border-slate-800 space-y-1.5">
             <div className="flex items-center justify-between">
-              <span className="font-bold text-emerald-400">🚀 Session 2: ปฏิบัติการสร้างเว็บ 2 ชม. (120 นาที)</span>
-              <span className="text-[10px] font-mono text-slate-500">Hands-on</span>
+              <span className="font-bold text-emerald-400">🚀 Session 2: จับมือทำจริง สร้างเว็บของตัวเอง! (120 นาที)</span>
+              <span className="text-[10px] font-mono text-slate-500">ลงมือทำจริง</span>
             </div>
             <p className="text-slate-300 leading-relaxed">
-              ลงมือทำจริง: ฝึกเขียน Prompt สูตร R-T-C-F, สร้างเว็บแรก Single-file, สั่งงาน Antigravity CLI และทำ Mini Project ของตนเอง
+              ลองสั่ง AI ด้วยภาษาคนธรรมดา ให้ช่วยสร้างหน้าเว็บสนุกๆ (เช่น เว็บสุ่มอาหาร, โปรไฟล์ตัวเอง) ดับเบิลคลิกเปิดเล่นได้ทันที!
             </p>
           </div>
         </div>
@@ -142,10 +140,10 @@ export default function HomeView({ fontSizes }) {
       <div className="space-y-4 pt-2">
         <div className="text-center space-y-1">
           <h2 className="text-xl sm:text-2xl font-bold text-white">
-            เลือกโหมดการใช้งานของคุณ เพื่อเริ่มต้นเรียนรู้
+            เลือกหน้าที่ของคุณ เพื่อเริ่มเข้าสู่บทเรียน
           </h2>
           <p className="text-xs sm:text-sm text-slate-400">
-            ระบบจัดสรรเครื่องมือและหน้าจอให้เหมาะสมกับบทบาทของคนสอนและนักเรียน
+            จะเปิดสอนคนอื่น หรือจะนั่งเรียนสบายๆ เลือกได้เลยครับ
           </p>
         </div>
 
@@ -162,34 +160,34 @@ export default function HomeView({ fontSizes }) {
 
               <div>
                 <span className="text-xs font-mono text-sky-400 font-semibold uppercase tracking-wider block mb-1">
-                  สำหรับผู้สอน & ติวเตอร์
+                  สำหรับคนสอน & พี่ติว
                 </span>
                 <h3 className="text-2xl font-bold text-white group-hover:text-sky-300 transition">
                   👨‍🏫 โหมดคนสอน (Teacher Mode)
                 </h3>
                 <p className="text-sm text-slate-400 mt-2 leading-relaxed">
-                  รวมสไลด์ฉายจอ 2 ชุด (Session 1 & 2), สคริปต์พูดเปิดใจ 3 นาที, แผนการสอน และคู่มือควบคุมเวลา 2 ชั่วโมง
+                  มีสไลด์ฉายขึ้นจอทีวี/โปรเจกเตอร์ 2 ชุด พร้อมบทพูดชวนคุยสนุกๆ และแนวทางช่วยน้องๆ เมื่อติดขัด
                 </p>
               </div>
 
               <ul className="text-xs text-slate-300 space-y-2 border-t border-slate-800 pt-4">
                 <li className="flex items-center space-x-2">
                   <span className="text-sky-400 font-bold">✓</span>
-                  <span>Session 1: สไลด์บรรยาย 6 เสาหลักความรู้ AI</span>
+                  <span>สไลด์ Session 1: เล่า 6 เรื่อง AI แบบเห็นภาพ</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <span className="text-sky-400 font-bold">✓</span>
-                  <span>Session 2: สไลด์สอนสด 5 หัวข้อปฏิบัติการ</span>
+                  <span>สไลด์ Session 2: พาทำเว็บ 5 หัวข้อ (กดลูกศรเปลี่ยนสไลด์ได้)</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <span className="text-sky-400 font-bold">✓</span>
-                  <span>บทพูดเปิดคลาส & คู่มือคนติว 120 นาที</span>
+                  <span>บทพูดเปิดคลาส & วิธีช่วยแก้ปัญหาในห้อง</span>
                 </li>
               </ul>
             </div>
 
             <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-sky-400 text-sm font-bold">
-              <span>เข้าสู่โหมดคนสอน</span>
+              <span>เปิดโหมดคนสอน</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
             </div>
           </Link>
@@ -206,34 +204,34 @@ export default function HomeView({ fontSizes }) {
 
               <div>
                 <span className="text-xs font-mono text-emerald-400 font-semibold uppercase tracking-wider block mb-1">
-                  สำหรับผู้เรียน & สมาชิกในบ้าน
+                  สำหรับคนเรียน & ทุกคนในบ้าน
                 </span>
                 <h3 className="text-2xl font-bold text-white group-hover:text-emerald-300 transition">
-                  🎓 โหมดนักเรียน (Student Mode)
+                  🎓 โหมดคนเรียน (Student Mode)
                 </h3>
                 <p className="text-sm text-slate-400 mt-2 leading-relaxed">
-                  รวมสรุปเนื้อหาบทเรียน, เครื่องมือสร้าง Prompt (RTCF), คลังคำสั่งพร้อมก๊อปปี้ และโจทย์ Mini Project
+                  สรุปเนื้อหาอ่านง่าย ไม่ใช้ศัพท์ยาก มีช่องให้ลองพิมพ์สั่ง AI และมีคำสั่งพร้อมใช้ให้กดก๊อปปี้ไปลองเล่นได้เลย
                 </p>
               </div>
 
               <ul className="text-xs text-slate-300 space-y-2 border-t border-slate-800 pt-4">
                 <li className="flex items-center space-x-2">
                   <span className="text-emerald-400 font-bold">✓</span>
-                  <span>สรุป 6 เสาหลักความรู้ AI ก่อนเริ่มเรียน</span>
+                  <span>อ่านสรุป 6 เรื่อง AI และ 5 หัวข้อแบบง่ายๆ</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <span className="text-emerald-400 font-bold">✓</span>
-                  <span>เครื่องมือทดลองสร้าง Prompt (สูตร R-T-C-F)</span>
+                  <span>เครื่องมือช่วยประกอบร่างคำสั่ง (สูตร RTCF)</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <span className="text-emerald-400 font-bold">✓</span>
-                  <span>คลัง Prompt พร้อมใช้, Mini Projects และสูตรแก้ Error</span>
+                  <span>รวมคำสั่งพร้อมก๊อปปี้ & โจทย์ทำเว็บ 15 นาที</span>
                 </li>
               </ul>
             </div>
 
             <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-emerald-400 text-sm font-bold">
-              <span>เข้าสู่โหมดนักเรียน</span>
+              <span>เปิดโหมดคนเรียน</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
             </div>
           </Link>
