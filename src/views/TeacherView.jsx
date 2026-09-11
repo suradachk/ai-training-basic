@@ -16,13 +16,13 @@ import {
   TrendingUp,
   Cpu,
   Clock,
-  Layers
+  HeartPulse
 } from 'lucide-react'
 import { TOPICS_DETAIL, AI_FUTURE_SUMMARY } from '../data/workshopData'
-import AiHierarchyCard from '../components/AiHierarchyCard'
+import FamilyAiKnowledgeCard from '../components/FamilyAiKnowledgeCard'
 
 export default function TeacherView({ fontSizes }) {
-  const [currentTab, setCurrentTab] = useState('slides') // 'slides', 'hierarchy', 'future', 'intro', 'curriculum', 'tutor'
+  const [currentTab, setCurrentTab] = useState('slides') // 'slides', 'family', 'future', 'intro', 'curriculum', 'tutor'
   const [currentTopicId, setCurrentTopicId] = useState(1)
   const [copiedKey, setCopiedKey] = useState(null)
 
@@ -67,15 +67,15 @@ export default function TeacherView({ fontSizes }) {
           </button>
 
           <button
-            onClick={() => setCurrentTab('hierarchy')}
+            onClick={() => setCurrentTab('family')}
             className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition ${
-              currentTab === 'hierarchy'
-                ? 'bg-sky-600 text-white font-bold shadow-sm'
+              currentTab === 'family'
+                ? 'bg-rose-600 text-white font-bold shadow-sm'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
             }`}
           >
-            <Layers className="w-4 h-4" />
-            <span>2. AI vs ML vs DL vs GenAI</span>
+            <HeartPulse className="w-4 h-4" />
+            <span>2. AI ในครอบครัว & ชีวิตจริง</span>
           </button>
 
           <button
@@ -214,23 +214,6 @@ export default function TeacherView({ fontSizes }) {
                 ))}
               </div>
 
-              {/* Special Interactive Prompt for Topic 1: View Deep Hierarchy */}
-              {currentTopic.id === 1 && (
-                <div className="mb-5 p-3.5 bg-sky-950/30 border border-sky-500/30 rounded-xl flex items-center justify-between flex-wrap gap-3">
-                  <div className="flex items-center space-x-2 text-xs text-sky-200">
-                    <Sparkles className="w-4 h-4 text-sky-400 shrink-0" />
-                    <span>ต้องการเจาะลึก <strong>AI vs ML vs DL vs GenAI</strong> พร้อมแผนภาพตุ๊กตาแม่ลูกดกและตารางเปรียบเทียบ?</span>
-                  </div>
-                  <button
-                    onClick={() => setCurrentTab('hierarchy')}
-                    className="px-3 py-1.5 bg-sky-600 hover:bg-sky-500 text-white rounded-lg text-xs font-bold transition flex items-center space-x-1.5 shadow-sm"
-                  >
-                    <Layers className="w-3.5 h-3.5" />
-                    <span>เปิดโหมดเปรียบเทียบละเอียด</span>
-                  </button>
-                </div>
-              )}
-
               {/* Activity */}
               <div className="minimal-card-inner p-3.5 rounded-xl border border-slate-800 flex items-start space-x-3">
                 <div className="p-1.5 rounded-md bg-slate-800 text-sky-400 shrink-0">
@@ -283,10 +266,10 @@ export default function TeacherView({ fontSizes }) {
         </div>
       )}
 
-      {/* TAB 2: AI vs ML vs DL vs GenAI HIERARCHY */}
-      {currentTab === 'hierarchy' && (
+      {/* TAB 2: FAMILY & DAILY LIFE AI KNOWLEDGE */}
+      {currentTab === 'family' && (
         <div className="animate-fadeIn">
-          <AiHierarchyCard fontSizes={fontSizes} />
+          <FamilyAiKnowledgeCard fontSizes={fontSizes} />
         </div>
       )}
 
@@ -368,7 +351,14 @@ export default function TeacherView({ fontSizes }) {
         </div>
       )}
 
-      {/* TAB 3: INTRO SPEECH */}
+      {/* TAB 4: FAMILY & DAILY LIFE AI KNOWLEDGE */}
+      {currentTab === 'family' && (
+        <div className="animate-fadeIn">
+          <FamilyAiKnowledgeCard fontSizes={fontSizes} />
+        </div>
+      )}
+
+      {/* TAB 5: INTRO SPEECH */}
       {currentTab === 'intro' && (
         <div className="minimal-card rounded-2xl p-6 lg:p-8 space-y-6">
           <div className="space-y-1">

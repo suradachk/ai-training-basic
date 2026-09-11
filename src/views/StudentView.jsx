@@ -11,13 +11,13 @@ import {
   Zap,
   Check,
   Copy,
-  Layers
+  HeartPulse
 } from 'lucide-react'
 import { TOPICS_DETAIL, PROMPT_TEMPLATES, PROJECT_IDEAS, AI_FUTURE_SUMMARY } from '../data/workshopData'
-import AiHierarchyCard from '../components/AiHierarchyCard'
+import FamilyAiKnowledgeCard from '../components/FamilyAiKnowledgeCard'
 
 export default function StudentView({ fontSizes }) {
-  const [currentTab, setCurrentTab] = useState('hierarchy') // 'hierarchy', 'future', 'notes', 'builder', 'prompts', 'projects', 'debug'
+  const [currentTab, setCurrentTab] = useState('family') // 'family', 'future', 'notes', 'builder', 'prompts', 'projects', 'debug'
   const [copiedKey, setCopiedKey] = useState(null)
 
   // Interactive Prompt Builder
@@ -61,15 +61,15 @@ export default function StudentView({ fontSizes }) {
       {/* Student Navigation Sub-Tabs */}
       <div className="flex items-center space-x-1 bg-[#131b2e] p-1 rounded-xl border border-slate-800 text-xs sm:text-sm font-medium overflow-x-auto custom-scrollbar">
         <button
-          onClick={() => setCurrentTab('hierarchy')}
+          onClick={() => setCurrentTab('family')}
           className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition whitespace-nowrap ${
-            currentTab === 'hierarchy'
-              ? 'bg-emerald-600 text-white font-bold shadow-sm'
+            currentTab === 'family'
+              ? 'bg-rose-600 text-white font-bold shadow-sm'
               : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
           }`}
         >
-          <Layers className="w-4 h-4" />
-          <span>1. AI vs ML vs DL vs GenAI</span>
+          <HeartPulse className="w-4 h-4" />
+          <span>1. AI ในครอบครัว & ชีวิตจริง</span>
         </button>
 
         <button
@@ -145,10 +145,10 @@ export default function StudentView({ fontSizes }) {
         </button>
       </div>
 
-      {/* TAB 1: AI vs ML vs DL vs GenAI HIERARCHY */}
-      {currentTab === 'hierarchy' && (
+      {/* TAB 1: FAMILY & DAILY LIFE AI KNOWLEDGE */}
+      {currentTab === 'family' && (
         <div className="animate-fadeIn">
-          <AiHierarchyCard fontSizes={fontSizes} />
+          <FamilyAiKnowledgeCard fontSizes={fontSizes} />
         </div>
       )}
 
