@@ -101,37 +101,57 @@ export default function HomeView({ fontSizes }) {
         </p>
       </div>
 
-      {/* 🚀 COURSE SESSIONS ROADMAP BANNER */}
+      {/* 🚀 COURSE PILLARS & ROADMAP BANNER */}
       <div className="minimal-card rounded-2xl p-6 border border-slate-800 space-y-4">
         <div className="flex items-center justify-between flex-wrap gap-2 border-b border-slate-800 pb-3">
           <div className="flex items-center space-x-2">
             <Rocket className="w-5 h-5 text-emerald-400" />
-            <h3 className="text-base font-bold text-white">สิ่งที่เราจะได้เรียนรู้ด้วยกันในคอร์สนี้ (2 ช่วงง่ายๆ)</h3>
+            <h3 className="text-base font-bold text-white">4 หมวดการเรียนรู้ทีละสเต็ป (เข้าใจง่าย นำไปใช้ได้ทันที)</h3>
           </div>
           <span className="text-xs font-mono text-slate-400 bg-slate-800 px-2.5 py-1 rounded">
-            ใช้เวลารวมประมาณ 2 ชม. ครึ่ง
+            เรียนรู้ตามจังหวะของตัวเอง
           </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-          <div className="p-4 rounded-xl bg-[#060911] border border-slate-800 space-y-1.5">
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-sky-400">🌟 Session 1: คุยสนุกๆ ปูพื้นฐาน 6 เรื่อง AI (30 นาที)</span>
-              <span className="text-[10px] font-mono text-slate-500">ฟังเพลินๆ</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3.5 text-xs">
+          <div className="p-4 rounded-xl bg-[#060911] border border-slate-800 space-y-1.5 flex flex-col justify-between">
+            <div className="space-y-1.5">
+              <span className="font-bold text-sky-400 block">🌟 1. ปูพื้นฐาน 6 เรื่อง AI</span>
+              <p className="text-slate-300 leading-relaxed">
+                ทำความเข้าใจ AI แบบเห็นภาพ รู้ว่าทำอะไรได้บ้าง เก่งแค่ไหน และช่วยชีวิตจริงได้อย่างไร
+              </p>
             </div>
-            <p className="text-slate-300 leading-relaxed">
-              มาดูว่า AI คืออะไร ทำอะไรให้เราได้บ้าง ตอนนี้เก่งไปถึงไหนแล้ว และเอามาช่วยงานบ้าน งานประจำวัน หรือช่วยลูกเรียนได้อย่างไร
-            </p>
+            <span className="text-[10px] font-mono text-slate-500 pt-2 border-t border-slate-800/80">AI 360° Overview</span>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#060911] border border-slate-800 space-y-1.5">
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-emerald-400">🚀 Session 2: จับมือทำจริง สร้างเว็บของตัวเอง! (120 นาที)</span>
-              <span className="text-[10px] font-mono text-slate-500">ลงมือทำจริง</span>
+          <div className="p-4 rounded-xl bg-[#060911] border border-slate-800 space-y-1.5 flex flex-col justify-between">
+            <div className="space-y-1.5">
+              <span className="font-bold text-indigo-400 block">🪜 2. บันได 5 ระดับ AI</span>
+              <p className="text-slate-300 leading-relaxed">
+                ไต่ระดับจากถามตอบแทน Google ➡️ สูตร RTCF ➡️ สร้างผู้ช่วย ➡️ ทำหน้าเว็บ ➡️ ก้าวสู่ AI Agent
+              </p>
             </div>
-            <p className="text-slate-300 leading-relaxed">
-              ลองสั่ง AI ด้วยภาษาคนธรรมดา ให้ช่วยสร้างหน้าเว็บสนุกๆ (เช่น เว็บสุ่มอาหาร, โปรไฟล์ตัวเอง) ดับเบิลคลิกเปิดเล่นได้ทันที!
-            </p>
+            <span className="text-[10px] font-mono text-slate-500 pt-2 border-t border-slate-800/80">5 AI Levels Ladder</span>
+          </div>
+
+          <div className="p-4 rounded-xl bg-[#060911] border border-slate-800 space-y-1.5 flex flex-col justify-between">
+            <div className="space-y-1.5">
+              <span className="font-bold text-emerald-400 block">💼 3. ปรับใช้จริง & หาเงิน</span>
+              <p className="text-slate-300 leading-relaxed">
+                วิธีปรับตัวสำหรับนักเรียน คนทำงาน และ 6 ช่องทางสร้างรายได้จริงด้วย AI
+              </p>
+            </div>
+            <span className="text-[10px] font-mono text-slate-500 pt-2 border-t border-slate-800/80">Career & Monetization</span>
+          </div>
+
+          <div className="p-4 rounded-xl bg-[#060911] border border-slate-800 space-y-1.5 flex flex-col justify-between">
+            <div className="space-y-1.5">
+              <span className="font-bold text-rose-400 block">🏠 4. คลังความรู้ครอบครัว</span>
+              <p className="text-slate-300 leading-relaxed">
+                รวมไอเดียดูแลสุขภาพ ป้องกันมิจฉาชีพ งานบ้าน จัดทริปเที่ยว และติวลูกหลาน
+              </p>
+            </div>
+            <span className="text-[10px] font-mono text-slate-500 pt-2 border-t border-slate-800/80">Family & Daily Life</span>
           </div>
         </div>
       </div>
@@ -173,15 +193,15 @@ export default function HomeView({ fontSizes }) {
               <ul className="text-xs text-slate-300 space-y-2 border-t border-slate-800 pt-4">
                 <li className="flex items-center space-x-2">
                   <span className="text-sky-400 font-bold">✓</span>
-                  <span>สไลด์ Session 1: เล่า 6 เรื่อง AI แบบเห็นภาพ</span>
+                  <span>สไลด์สอนสด 6 เสาหลักความรู้ AI</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <span className="text-sky-400 font-bold">✓</span>
-                  <span>สไลด์ Session 2: พาทำเว็บ 5 หัวข้อ (กดลูกศรเปลี่ยนสไลด์ได้)</span>
+                  <span>สไลด์สอนสด บันได 5 ระดับ AI (กดลูกศรเปลี่ยนสไลด์ได้)</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <span className="text-sky-400 font-bold">✓</span>
-                  <span>บทพูดเปิดคลาส & วิธีช่วยแก้ปัญหาในห้อง</span>
+                  <span>คู่มือปรับใช้จริง & ช่องทางหาเงินด้วย AI</span>
                 </li>
               </ul>
             </div>
@@ -210,22 +230,22 @@ export default function HomeView({ fontSizes }) {
                   🎓 โหมดคนเรียน (Student Mode)
                 </h3>
                 <p className="text-sm text-slate-400 mt-2 leading-relaxed">
-                  สรุปเนื้อหาอ่านง่าย ไม่ใช้ศัพท์ยาก มีช่องให้ลองพิมพ์สั่ง AI และมีคำสั่งพร้อมใช้ให้กดก๊อปปี้ไปลองเล่นได้เลย
+                  สรุปเนื้อหาอ่านง่าย มีบันได 5 ระดับ AI พร้อมเครื่องมือสร้าง Prompt คลังคำสั่ง และไอเดียสร้างรายได้
                 </p>
               </div>
 
               <ul className="text-xs text-slate-300 space-y-2 border-t border-slate-800 pt-4">
                 <li className="flex items-center space-x-2">
                   <span className="text-emerald-400 font-bold">✓</span>
-                  <span>อ่านสรุป 6 เรื่อง AI และ 5 หัวข้อแบบง่ายๆ</span>
+                  <span>อ่านสรุป 6 เสาหลัก & บันได 5 ระดับ AI</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <span className="text-emerald-400 font-bold">✓</span>
-                  <span>เครื่องมือช่วยประกอบร่างคำสั่ง (สูตร RTCF)</span>
+                  <span>เครื่องมือสร้าง Prompt (RTCF) & คลังคำสั่งพร้อมก๊อปปี้</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <span className="text-emerald-400 font-bold">✓</span>
-                  <span>รวมคำสั่งพร้อมก๊อปปี้ & โจทย์ทำเว็บ 15 นาที</span>
+                  <span>แนวทางปรับใช้ในชีวิตจริง & 6 ช่องทางหาเงิน</span>
                 </li>
               </ul>
             </div>

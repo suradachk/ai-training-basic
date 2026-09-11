@@ -69,9 +69,9 @@ export default function AiOverviewSection({ fontSizes = { base: 'text-sm', headi
             <div>
               <div className="flex items-center space-x-2">
                 <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800/80 uppercase tracking-wider">
-                  Session 1 (30 นาที)
+                  ส่วนที่ 1 • ปูพื้นฐาน AI
                 </span>
-                <span className="text-xs text-slate-400">ปูพื้นฐานความเข้าใจก่อนเริ่มเวิร์กช็อป</span>
+                <span className="text-xs text-slate-400">ภาพรวมความรู้ AI สำหรับทุกคน</span>
               </div>
               <h2 className={`${fontSizes.heading} font-bold text-white mt-1`}>
                 6 เสาหลักความรู้ AI ครบวงจร (AI 360° Overview)

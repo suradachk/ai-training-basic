@@ -48,8 +48,8 @@ export default function Navbar({
               <Link to="/" className="text-base sm:text-lg font-bold text-white tracking-wide hover:text-sky-300 transition">
                 AI + Antigravity
               </Link>
-              <span className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-slate-800 border border-slate-700 text-slate-300">
-                2 ชั่วโมง
+              <span className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-slate-800 border border-slate-700 text-sky-300">
+                5 ระดับ AI
               </span>
             </div>
             <p className="text-xs text-slate-400">Minimal Dark Mode • อ่านง่าย สบายตา</p>
