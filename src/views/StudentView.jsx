@@ -17,7 +17,7 @@ import { TOPICS_DETAIL, PROMPT_TEMPLATES, PROJECT_IDEAS, AI_FUTURE_SUMMARY } fro
 import FamilyAiKnowledgeCard from '../components/FamilyAiKnowledgeCard'
 
 export default function StudentView({ fontSizes }) {
-  const [currentTab, setCurrentTab] = useState('family') // 'family', 'future', 'notes', 'builder', 'prompts', 'projects', 'debug'
+  const [currentTab, setCurrentTab] = useState('notes') // 'notes', 'builder', 'prompts', 'projects', 'debug', 'family', 'future'
   const [copiedKey, setCopiedKey] = useState(null)
 
   // Interactive Prompt Builder
@@ -60,6 +60,71 @@ export default function StudentView({ fontSizes }) {
     <div className="space-y-6">
       {/* Student Navigation Sub-Tabs */}
       <div className="flex items-center space-x-1 bg-[#131b2e] p-1 rounded-xl border border-slate-800 text-xs sm:text-sm font-medium overflow-x-auto custom-scrollbar">
+        {/* Core Lesson Tabs */}
+        <button
+          onClick={() => setCurrentTab('notes')}
+          className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition whitespace-nowrap ${
+            currentTab === 'notes'
+              ? 'bg-sky-600 text-white font-bold shadow-sm'
+              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+          }`}
+        >
+          <BookOpen className="w-4 h-4" />
+          <span>1. สรุปบทเรียน 5 หัวข้อ</span>
+        </button>
+
+        <button
+          onClick={() => setCurrentTab('builder')}
+          className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition whitespace-nowrap ${
+            currentTab === 'builder'
+              ? 'bg-sky-600 text-white font-bold shadow-sm'
+              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+          }`}
+        >
+          <Wand2 className="w-4 h-4" />
+          <span>2. เครื่องมือสร้าง Prompt (RTCF)</span>
+        </button>
+
+        <button
+          onClick={() => setCurrentTab('prompts')}
+          className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition whitespace-nowrap ${
+            currentTab === 'prompts'
+              ? 'bg-sky-600 text-white font-bold shadow-sm'
+              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+          }`}
+        >
+          <MessageSquare className="w-4 h-4" />
+          <span>3. คลัง Prompt พร้อมใช้</span>
+        </button>
+
+        <button
+          onClick={() => setCurrentTab('projects')}
+          className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition whitespace-nowrap ${
+            currentTab === 'projects'
+              ? 'bg-sky-600 text-white font-bold shadow-sm'
+              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+          }`}
+        >
+          <Rocket className="w-4 h-4" />
+          <span>4. โจทย์ Mini Project 15 นาที</span>
+        </button>
+
+        <button
+          onClick={() => setCurrentTab('debug')}
+          className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition whitespace-nowrap ${
+            currentTab === 'debug'
+              ? 'bg-sky-600 text-white font-bold shadow-sm'
+              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+          }`}
+        >
+          <Bug className="w-4 h-4" />
+          <span>5. วิธีแก้ Error (F12)</span>
+        </button>
+
+        {/* Divider */}
+        <div className="h-4 w-px bg-slate-700 my-auto mx-1"></div>
+
+        {/* Reference & Knowledge Base Tabs at the End */}
         <button
           onClick={() => setCurrentTab('family')}
           className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition whitespace-nowrap ${
@@ -69,7 +134,7 @@ export default function StudentView({ fontSizes }) {
           }`}
         >
           <HeartPulse className="w-4 h-4" />
-          <span>1. AI ในครอบครัว & ชีวิตจริง</span>
+          <span>6. คลังความรู้ AI ในครอบครัว 🏠</span>
         </button>
 
         <button
@@ -81,67 +146,7 @@ export default function StudentView({ fontSizes }) {
           }`}
         >
           <TrendingUp className="w-4 h-4" />
-          <span>2. AI ทำอะไรได้ & อนาคต</span>
-        </button>
-
-        <button
-          onClick={() => setCurrentTab('notes')}
-          className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition whitespace-nowrap ${
-            currentTab === 'notes'
-              ? 'bg-emerald-600 text-white font-bold shadow-sm'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
-          }`}
-        >
-          <BookOpen className="w-4 h-4" />
-          <span>3. สรุปบทเรียน 5 หัวข้อ</span>
-        </button>
-
-        <button
-          onClick={() => setCurrentTab('builder')}
-          className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition whitespace-nowrap ${
-            currentTab === 'builder'
-              ? 'bg-emerald-600 text-white font-bold shadow-sm'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
-          }`}
-        >
-          <Wand2 className="w-4 h-4" />
-          <span>4. เครื่องมือสร้าง Prompt (RTCF)</span>
-        </button>
-
-        <button
-          onClick={() => setCurrentTab('prompts')}
-          className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition whitespace-nowrap ${
-            currentTab === 'prompts'
-              ? 'bg-emerald-600 text-white font-bold shadow-sm'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
-          }`}
-        >
-          <MessageSquare className="w-4 h-4" />
-          <span>5. คลัง Prompt พร้อมใช้</span>
-        </button>
-
-        <button
-          onClick={() => setCurrentTab('projects')}
-          className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition whitespace-nowrap ${
-            currentTab === 'projects'
-              ? 'bg-emerald-600 text-white font-bold shadow-sm'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
-          }`}
-        >
-          <Rocket className="w-4 h-4" />
-          <span>6. โจทย์ Mini Project 15 นาที</span>
-        </button>
-
-        <button
-          onClick={() => setCurrentTab('debug')}
-          className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition whitespace-nowrap ${
-            currentTab === 'debug'
-              ? 'bg-emerald-600 text-white font-bold shadow-sm'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
-          }`}
-        >
-          <Bug className="w-4 h-4" />
-          <span>7. วิธีแก้ Error (F12)</span>
+          <span>7. AI ทำอะไรได้ & อนาคต 🔮</span>
         </button>
       </div>
 

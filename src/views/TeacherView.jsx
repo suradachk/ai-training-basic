@@ -22,7 +22,7 @@ import { TOPICS_DETAIL, AI_FUTURE_SUMMARY } from '../data/workshopData'
 import FamilyAiKnowledgeCard from '../components/FamilyAiKnowledgeCard'
 
 export default function TeacherView({ fontSizes }) {
-  const [currentTab, setCurrentTab] = useState('slides') // 'slides', 'family', 'future', 'intro', 'curriculum', 'tutor'
+  const [currentTab, setCurrentTab] = useState('slides') // 'slides', 'intro', 'curriculum', 'tutor', 'family', 'future'
   const [currentTopicId, setCurrentTopicId] = useState(1)
   const [copiedKey, setCopiedKey] = useState(null)
 
@@ -54,6 +54,7 @@ export default function TeacherView({ fontSizes }) {
       {/* Teacher Control Sub-Tabs */}
       <div className="flex items-center justify-between flex-wrap gap-3 border-b border-slate-800 pb-3">
         <div className="flex items-center space-x-1 bg-[#131b2e] p-1 rounded-xl border border-slate-800 text-xs sm:text-sm font-medium overflow-x-auto custom-scrollbar">
+          {/* Core Lesson Tabs */}
           <button
             onClick={() => setCurrentTab('slides')}
             className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition ${
@@ -63,9 +64,49 @@ export default function TeacherView({ fontSizes }) {
             }`}
           >
             <Presentation className="w-4 h-4" />
-            <span>1. สไลด์สอนสด (Slide Mode)</span>
+            <span>1. สไลด์สอนสด 5 หัวข้อ</span>
           </button>
 
+          <button
+            onClick={() => setCurrentTab('intro')}
+            className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition ${
+              currentTab === 'intro'
+                ? 'bg-sky-600 text-white font-bold shadow-sm'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+            }`}
+          >
+            <Mic className="w-4 h-4" />
+            <span>2. บทพูดเปิดคลาส (3 นาที)</span>
+          </button>
+
+          <button
+            onClick={() => setCurrentTab('curriculum')}
+            className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition ${
+              currentTab === 'curriculum'
+                ? 'bg-sky-600 text-white font-bold shadow-sm'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+            }`}
+          >
+            <BookOpen className="w-4 h-4" />
+            <span>3. แผนการสอน 5 หัวข้อ</span>
+          </button>
+
+          <button
+            onClick={() => setCurrentTab('tutor')}
+            className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition ${
+              currentTab === 'tutor'
+                ? 'bg-sky-600 text-white font-bold shadow-sm'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+            }`}
+          >
+            <GraduationCap className="w-4 h-4" />
+            <span>4. คู่มือคนติว & Checklist</span>
+          </button>
+
+          {/* Divider */}
+          <div className="h-4 w-px bg-slate-700 my-auto mx-1"></div>
+
+          {/* Reference & Knowledge Base Tabs */}
           <button
             onClick={() => setCurrentTab('family')}
             className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition ${
@@ -75,55 +116,19 @@ export default function TeacherView({ fontSizes }) {
             }`}
           >
             <HeartPulse className="w-4 h-4" />
-            <span>2. AI ในครอบครัว & ชีวิตจริง</span>
+            <span>5. คลังความรู้ AI ในครอบครัว 🏠</span>
           </button>
 
           <button
             onClick={() => setCurrentTab('future')}
             className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition ${
               currentTab === 'future'
-                ? 'bg-sky-600 text-white font-bold shadow-sm'
+                ? 'bg-emerald-600 text-white font-bold shadow-sm'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
             }`}
           >
             <TrendingUp className="w-4 h-4" />
-            <span>3. AI ทำอะไรได้ & อนาคต</span>
-          </button>
-
-          <button
-            onClick={() => setCurrentTab('intro')}
-            className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition ${
-              currentTab === 'intro'
-                ? 'bg-slate-700 text-white font-bold'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
-            }`}
-          >
-            <Mic className="w-4 h-4" />
-            <span>4. บทพูดเปิดคลาส (3 นาที)</span>
-          </button>
-
-          <button
-            onClick={() => setCurrentTab('curriculum')}
-            className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition ${
-              currentTab === 'curriculum'
-                ? 'bg-slate-700 text-white font-bold'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
-            }`}
-          >
-            <BookOpen className="w-4 h-4" />
-            <span>5. แผนการสอน 5 หัวข้อ</span>
-          </button>
-
-          <button
-            onClick={() => setCurrentTab('tutor')}
-            className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition ${
-              currentTab === 'tutor'
-                ? 'bg-slate-700 text-white font-bold'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
-            }`}
-          >
-            <GraduationCap className="w-4 h-4" />
-            <span>6. คู่มือคนติว & Checklist</span>
+            <span>6. AI ทำอะไรได้ & อนาคต 🔮</span>
           </button>
         </div>
 
