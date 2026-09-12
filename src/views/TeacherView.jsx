@@ -26,13 +26,14 @@ import { TOPICS_DETAIL } from "../data/workshopData";
 import FamilyAiKnowledgeCard from "../components/FamilyAiKnowledgeCard";
 import AiOverviewSection from "../components/AiOverviewSection";
 import CareerLifeAdaptationCard from "../components/CareerLifeAdaptationCard";
+import AiSecretaryBuilderCard from "../components/AiSecretaryBuilderCard";
 
 export default function TeacherView({ fontSizes }) {
   // Top-level Module Switcher: 'session1' | 'session2' | 'adaptation' | 'family'
   const [activeSession, setActiveSession] = useState("session1");
 
   // Sub-tab under Session 2 (5 AI Levels)
-  const [session2Tab, setSession2Tab] = useState("slides"); // 'slides' | 'intro' | 'curriculum' | 'tutor'
+  const [session2Tab, setSession2Tab] = useState("slides"); // 'slides' | 'intro' | 'curriculum' | 'secretary' | 'tutor'
   const [currentTopicId, setCurrentTopicId] = useState(1);
   const [copiedKey, setCopiedKey] = useState(null);
 
@@ -41,7 +42,7 @@ export default function TeacherView({ fontSizes }) {
     const handleKeyDown = (e) => {
       if (activeSession === "session2" && session2Tab === "slides") {
         if (e.key === "ArrowRight" || e.key === " ") {
-          setCurrentTopicId((prev) => Math.min(TOPICS_DETAIL.length, prev + 1));
+          setCurrentTopicId((prev) => Math.min(5, prev + 1));
         } else if (e.key === "ArrowLeft") {
           setCurrentTopicId((prev) => Math.max(1, prev - 1));
         }
@@ -118,7 +119,7 @@ export default function TeacherView({ fontSizes }) {
       </div>
 
       {/* ======================================================== */}
-      {/* 🌟 MODULE 1: 6 CORE PILLARS OVERVIEW                     */}
+      {/* 🌟 MODULE 1: 6 CORE PILLARS OVERVIEW (NEW SESSION 1)     */}
       {/* ======================================================== */}
       {activeSession === "session1" && (
         <div className="space-y-6 animate-fadeIn">
@@ -127,13 +128,13 @@ export default function TeacherView({ fontSizes }) {
       )}
 
       {/* ======================================================== */}
-      {/* 🚀 MODULE 2: 5 AI LEVELS MASTERY                         */}
+      {/* 🚀 MODULE 2: 5 AI LEVELS WORKSHOP (SESSION 2)            */}
       {/* ======================================================== */}
       {activeSession === "session2" && (
         <div className="space-y-6 animate-fadeIn">
           {/* Sub-Tab Navigation for 5 Levels */}
-          <div className="flex items-center justify-between flex-wrap gap-3 border-b border-slate-800 pb-3">
-            <div className="flex items-center space-x-1 bg-[#131b2e] p-1 rounded-xl border border-slate-800 text-xs sm:text-sm font-medium overflow-x-auto custom-scrollbar">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#131b2e] p-2 rounded-2xl border border-slate-800">
+            <div className="flex items-center space-x-1 text-xs sm:text-sm font-medium overflow-x-auto custom-scrollbar">
               <button
                 onClick={() => setSession2Tab("slides")}
                 className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition whitespace-nowrap ${
@@ -168,6 +169,17 @@ export default function TeacherView({ fontSizes }) {
               </button>
 
               <button
+                onClick={() => setSession2Tab("secretary")}
+                className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition whitespace-nowrap ${
+                  session2Tab === "secretary"
+                    ? "bg-purple-600 text-white font-bold shadow-sm"
+                    : "text-slate-400 hover:text-slate-200 hover:bg-slate-800"
+                }`}>
+                <Sparkles className="w-4 h-4 text-purple-300" />
+                <span>4. วิธีทำเลขา AI 24 ชม. 🤖</span>
+              </button>
+
+              <button
                 onClick={() => setSession2Tab("tutor")}
                 className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition whitespace-nowrap ${
                   session2Tab === "tutor"
@@ -175,7 +187,7 @@ export default function TeacherView({ fontSizes }) {
                     : "text-slate-400 hover:text-slate-200 hover:bg-slate-800"
                 }`}>
                 <GraduationCap className="w-4 h-4" />
-                <span>4. คู่มือคนติว & Checklist</span>
+                <span>5. คู่มือคนติว & Checklist</span>
               </button>
             </div>
 
@@ -463,7 +475,14 @@ export default function TeacherView({ fontSizes }) {
             </div>
           )}
 
-          {/* TAB 4: TUTOR GUIDE */}
+          {/* TAB 4: AI SECRETARY BUILDER */}
+          {session2Tab === "secretary" && (
+            <div className="space-y-6 animate-fadeIn">
+              <AiSecretaryBuilderCard fontSizes={fontSizes} />
+            </div>
+          )}
+
+          {/* TAB 5: TUTOR GUIDE */}
           {session2Tab === "tutor" && (
             <div className="minimal-card rounded-2xl p-6 space-y-6">
               <div className="space-y-1">

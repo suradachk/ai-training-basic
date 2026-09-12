@@ -161,14 +161,14 @@ export default function HomeView({ fontSizes }) {
           <div className="p-4 rounded-xl bg-[#060911] border border-slate-800 space-y-1.5 flex flex-col justify-between">
             <div className="space-y-1.5">
               <span className="font-bold text-emerald-400 block">
-                💼 3. ปรับใช้จริง{" "}
+                💼 3. ปรับใช้จริงในชีวิต
               </span>
               <p className="text-slate-300 leading-relaxed">
-                วิธีปรับตัวสำหรับนักเรียน คนทำงาน และ
+                ตัวอย่างใช้งานจริงในบ้าน การเรียน ติวลูกหลาน งานประจำ และสุขภาพ
               </p>
             </div>
             <span className="text-[10px] font-mono text-slate-500 pt-2 border-t border-slate-800/80">
-              Career & Monetization
+              Real-Life Adaptation
             </span>
           </div>
 

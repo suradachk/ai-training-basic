@@ -25,13 +25,14 @@ import {
 import FamilyAiKnowledgeCard from "../components/FamilyAiKnowledgeCard";
 import AiOverviewSection from "../components/AiOverviewSection";
 import CareerLifeAdaptationCard from "../components/CareerLifeAdaptationCard";
+import AiSecretaryBuilderCard from "../components/AiSecretaryBuilderCard";
 
 export default function StudentView({ fontSizes }) {
   // Top-level Module Switcher: 'session1' | 'session2' | 'adaptation' | 'family'
   const [activeSession, setActiveSession] = useState("session1");
 
   // Sub-tab under Session 2 (5 AI Levels)
-  const [session2Tab, setSession2Tab] = useState("notes"); // 'notes', 'builder', 'prompts', 'projects', 'debug'
+  const [session2Tab, setSession2Tab] = useState("notes"); // 'notes', 'builder', 'secretary', 'prompts', 'projects', 'debug'
   const [copiedKey, setCopiedKey] = useState(null);
 
   // Interactive Prompt Builder
@@ -166,7 +167,18 @@ export default function StudentView({ fontSizes }) {
                   : "text-slate-400 hover:text-slate-200 hover:bg-slate-800"
               }`}>
               <Wand2 className="w-4 h-4" />
-              <span>2. เครื่องมือสร้าง Prompt (RTCF)</span>
+              <span>2. ฝึกสั่งงาน RTCF</span>
+            </button>
+
+            <button
+              onClick={() => setSession2Tab("secretary")}
+              className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition whitespace-nowrap ${
+                session2Tab === "secretary"
+                  ? "bg-purple-600 text-white font-bold shadow-sm"
+                  : "text-slate-400 hover:text-slate-200 hover:bg-slate-800"
+              }`}>
+              <Sparkles className="w-4 h-4 text-purple-300" />
+              <span>3. ทำเลขา AI 24 ชม. 🤖</span>
             </button>
 
             <button
@@ -177,7 +189,7 @@ export default function StudentView({ fontSizes }) {
                   : "text-slate-400 hover:text-slate-200 hover:bg-slate-800"
               }`}>
               <MessageSquare className="w-4 h-4" />
-              <span>3. คลัง Prompt พร้อมใช้</span>
+              <span>4. คลัง Prompt พร้อมใช้</span>
             </button>
 
             <button
@@ -188,7 +200,7 @@ export default function StudentView({ fontSizes }) {
                   : "text-slate-400 hover:text-slate-200 hover:bg-slate-800"
               }`}>
               <Rocket className="w-4 h-4" />
-              <span>4. โจทย์ Mini Projects</span>
+              <span>5. โจทย์ Mini Projects</span>
             </button>
 
             <button
@@ -199,7 +211,7 @@ export default function StudentView({ fontSizes }) {
                   : "text-slate-400 hover:text-slate-200 hover:bg-slate-800"
               }`}>
               <Bug className="w-4 h-4" />
-              <span>5. วิธีแก้ Error (F12)</span>
+              <span>6. วิธีแก้ Error (F12)</span>
             </button>
           </div>
 
@@ -245,6 +257,21 @@ export default function StudentView({ fontSizes }) {
                     <div className="minimal-card-inner p-3.5 rounded-xl text-slate-200 text-sm leading-relaxed">
                       💡 <strong>เปรียบเทียบ:</strong> {topic.analogy.text}
                     </div>
+
+                    {/* Quick Link for Level 3 */}
+                    {topic.level === 3 && (
+                      <div className="p-3 rounded-xl bg-purple-950/40 border border-purple-800/60 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+                        <span className="text-purple-200 font-medium">
+                          ✨ อยากมีเลขา AI ประจำตัวที่รู้ใจ 24 ชม. โดยไม่ต้องเขียนโค้ด?
+                        </span>
+                        <button
+                          onClick={() => setSession2Tab("secretary")}
+                          className="px-3 py-1.5 bg-purple-600 hover:bg-purple-500 text-white rounded-lg font-bold flex items-center space-x-1 shrink-0 transition"
+                        >
+                          <span>เปิดคู่มือทำเลขา AI 🤖</span>
+                        </button>
+                      </div>
+                    )}
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-1">
                       {topic.subtopics.map((sub, sIdx) => (
@@ -368,15 +395,15 @@ export default function StudentView({ fontSizes }) {
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-                        Prompt ฉบับสมบูรณ์
+                        Prompt ที่ประกอบเสร็จแล้ว
                       </span>
                       <button
                         onClick={() =>
                           copyToClipboard(generatedPrompt, "builder")
                         }
-                        className="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded text-xs font-bold flex items-center space-x-1">
+                        className="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold flex items-center space-x-1 transition">
                         {copiedKey === "builder" ? (
-                          <Check className="w-3.5 h-3.5" />
+                          <Check className="w-3.5 h-3.5 text-white" />
                         ) : (
                           <Copy className="w-3.5 h-3.5" />
                         )}
@@ -400,6 +427,13 @@ export default function StudentView({ fontSizes }) {
                   </div>
                 </div>
               </div>
+            </div>
+          )}
+
+          {/* TAB 3: AI SECRETARY BUILDER (NEW!) */}
+          {session2Tab === "secretary" && (
+            <div className="space-y-6">
+              <AiSecretaryBuilderCard fontSizes={fontSizes} />
             </div>
           )}
 
