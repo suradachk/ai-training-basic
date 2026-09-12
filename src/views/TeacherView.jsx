@@ -267,17 +267,43 @@ export default function TeacherView({ fontSizes }) {
                         </p>
                       </div>
                     </div>
-                    <span className="text-xs font-mono bg-sky-950/80 border border-sky-800 px-3 py-1 rounded-md text-sky-300 font-bold">
-                      {currentTopic.levelBadge}
-                    </span>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-xs font-mono bg-emerald-950/80 border border-emerald-800 px-3 py-1 rounded-md text-emerald-300 font-bold">
+                        🌍 คนทั้งโลกใช้เป็น {currentTopic.globalPercent}
+                      </span>
+                      <span className="text-xs font-mono bg-sky-950/80 border border-sky-800 px-3 py-1 rounded-md text-sky-300 font-bold">
+                        {currentTopic.levelBadge}
+                      </span>
+                    </div>
                   </div>
 
                   {/* Analogy Box */}
-                  <div className="minimal-card-inner p-4 rounded-xl border border-slate-800 mb-5">
+                  <div className="minimal-card-inner p-4 rounded-xl border border-slate-800 mb-4">
                     <p
                       className={`${fontSizes.base} text-slate-200 leading-relaxed font-medium`}>
                       {currentTopic.analogy.text}
                     </p>
+                  </div>
+
+                  {/* 🌟 USER ADVANTAGE IN SLIDE */}
+                  <div className="p-4 rounded-xl bg-gradient-to-r from-emerald-950/40 via-[#0d1f18] to-slate-900 border border-emerald-800/60 mb-5 space-y-2.5">
+                    <div className="flex items-center justify-between flex-wrap gap-2">
+                      <span className="text-xs font-bold text-emerald-300 uppercase tracking-wider font-mono">
+                        🌟 จุดเด่น & ความได้เปรียบของระดับนี้:
+                      </span>
+                      <span className="text-[11px] font-semibold px-2 py-0.5 rounded bg-emerald-900/70 text-emerald-200 border border-emerald-700/80">
+                        ⚡ {currentTopic.advantageSummary}
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
+                      {currentTopic.userAdvantage.benefits.map((b, bIdx) => (
+                        <div key={bIdx} className="p-2.5 rounded-lg bg-[#060911]/80 border border-emerald-900/40 space-y-0.5">
+                          <h5 className="text-xs font-bold text-white">{b.title}</h5>
+                          <p className="text-[11px] text-slate-300 leading-relaxed">{b.desc}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
                   {/* 3 Subtopics */}
@@ -441,15 +467,23 @@ export default function TeacherView({ fontSizes }) {
                 <div
                   key={topic.id}
                   className="minimal-card rounded-2xl p-6 space-y-4">
-                  <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
                     <h4 className="text-lg font-bold text-white">
                       {topic.title}
                     </h4>
-                    <span className="text-xs font-mono text-sky-400 bg-sky-950 border border-sky-800 px-2.5 py-1 rounded font-bold">
-                      {topic.levelBadge}
-                    </span>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-xs font-mono text-emerald-300 bg-emerald-950/80 border border-emerald-800 px-2.5 py-1 rounded font-bold">
+                        🌍 คนทั้งโลกใช้เป็น {topic.globalPercent}
+                      </span>
+                      <span className="text-xs font-mono text-sky-400 bg-sky-950 border border-sky-800 px-2.5 py-1 rounded font-bold">
+                        {topic.levelBadge}
+                      </span>
+                    </div>
                   </div>
-                  <p className="text-sm text-slate-300">{topic.tagline}</p>
+                  <div className="flex items-center justify-between text-xs text-slate-300">
+                    <span>{topic.tagline}</span>
+                    <span className="text-emerald-300 font-semibold">⚡ {topic.advantageSummary}</span>
+                  </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
                     {topic.subtopics.map((sub, idx) => (

@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import {
   TOPICS_DETAIL,
+  AI_LEVELS_PYRAMID,
   PROMPT_TEMPLATES,
   PROJECT_IDEAS,
 } from "../data/workshopData";
@@ -218,6 +219,7 @@ export default function StudentView({ fontSizes }) {
           {/* TAB 1: 5 LEVELS NOTES */}
           {session2Tab === "notes" && (
             <div className="space-y-6">
+              {/* Header */}
               <div className="minimal-card rounded-2xl p-6 space-y-2">
                 <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider block">
                   บันได 5 ขั้น สู่การเป็นเจ้านาย AI
@@ -228,45 +230,145 @@ export default function StudentView({ fontSizes }) {
                 </h2>
                 <p
                   className={`${fontSizes.base} text-slate-300 leading-relaxed`}>
-                  เรียนรู้และฝึกฝนทีละระดับ ตั้งแต่การถามตอบแทน Google
-                  สั่งงานด้วยสูตร RTCF สร้างผู้ช่วยส่วนตัว ทำหน้าเว็บ และใช้ AI
-                  Agent
+                  รู้ก่อนได้เปรียบ: มาดูกันว่าคนทั้งโลกใช้ AI อยู่ในระดับไหน และเมื่อคุณก้าวข้ามแต่ละระดับ จะปลดล็อกพลังพิเศษ (Superpower) อะไรบ้าง
                 </p>
               </div>
 
+              {/* 📊 GLOBAL ADOPTION PYRAMID CARD */}
+              <div className="minimal-card rounded-2xl p-6 border border-slate-800 space-y-5 bg-gradient-to-br from-[#0c1427] via-[#090f1d] to-[#060911]">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+                  <div>
+                    <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider block">
+                      🌍 สถิติผู้ใช้งาน AI ทั่วโลก (AI Adoption Pyramid)
+                    </span>
+                    <h3 className="text-base sm:text-lg font-bold text-white">
+                      คนทั้งโลกใช้ AI เป็นกี่เปอร์เซ็นต์? และคุณอยู่จุดไหน?
+                    </h3>
+                  </div>
+                  <span className="text-xs text-slate-400">
+                    ยิ่งไต่ระดับสูง ยิ่งได้เปรียบคน 99% ของโลก
+                  </span>
+                </div>
+
+                <div className="space-y-3">
+                  {AI_LEVELS_PYRAMID.map((tier) => (
+                    <div
+                      key={tier.level}
+                      className="p-3.5 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2 hover:border-slate-700 transition"
+                    >
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <div className="flex items-center space-x-2.5">
+                          <span className={`px-2.5 py-0.5 rounded text-xs font-mono font-bold border ${tier.badgeColor}`}>
+                            {tier.percent}
+                          </span>
+                          <span className="text-xs sm:text-sm font-bold text-white">
+                            {tier.title}
+                          </span>
+                        </div>
+                        <span className="text-[11px] font-mono text-slate-400">
+                          {tier.tier}
+                        </span>
+                      </div>
+
+                      {/* Progress Bar Representation */}
+                      <div className="w-full bg-slate-800/80 rounded-full h-2 overflow-hidden">
+                        <div
+                          className={`h-full rounded-full bg-gradient-to-r ${tier.barColor} ${tier.barWidth}`}
+                        />
+                      </div>
+
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-[11px] pt-1">
+                        <span className="text-slate-400">
+                          🎯 {tier.summary}
+                        </span>
+                        <span className="text-emerald-300 font-semibold">
+                          ✨ ได้เปรียบ: {tier.advantage}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 5 TOPICS DETAIL CARDS */}
               <div className="space-y-6">
                 {TOPICS_DETAIL.map((topic) => (
                   <div
                     key={topic.id}
-                    className="minimal-card rounded-2xl p-6 space-y-4">
-                    <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-                      <div className="flex items-center space-x-2.5">
-                        <span className="w-7 h-7 rounded bg-slate-800 text-emerald-400 flex items-center justify-center font-bold text-xs border border-slate-700 font-mono">
+                    className="minimal-card rounded-2xl p-6 space-y-5">
+                    {/* Level Header with Global Stats Badge */}
+                    <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3">
+                      <div className="flex items-center space-x-3">
+                        <span className="w-8 h-8 rounded-lg bg-slate-800 text-emerald-400 flex items-center justify-center font-bold text-sm border border-slate-700 font-mono">
                           L{topic.level}
                         </span>
-                        <h3
-                          className={`${fontSizes.title} font-bold text-white`}>
-                          {topic.title}
-                        </h3>
+                        <div>
+                          <h3
+                            className={`${fontSizes.title} font-bold text-white`}>
+                            {topic.title}
+                          </h3>
+                          <p className="text-xs text-slate-400">
+                            {topic.tagline}
+                          </p>
+                        </div>
                       </div>
-                      <span className="text-xs font-mono text-sky-400 bg-sky-950 border border-sky-800 px-2.5 py-1 rounded font-bold">
-                        {topic.levelBadge}
-                      </span>
+
+                      <div className="flex items-center space-x-2">
+                        <span className="text-xs font-mono text-emerald-300 bg-emerald-950/80 border border-emerald-800 px-2.5 py-1 rounded font-bold">
+                          🌍 คนทั้งโลกใช้เป็น {topic.globalPercent}
+                        </span>
+                        <span className="text-xs font-mono text-sky-400 bg-sky-950 border border-sky-800 px-2.5 py-1 rounded font-bold hidden sm:inline">
+                          {topic.levelBadge}
+                        </span>
+                      </div>
                     </div>
 
+                    {/* Analogy Box */}
                     <div className="minimal-card-inner p-3.5 rounded-xl text-slate-200 text-sm leading-relaxed">
-                      💡 <strong>เปรียบเทียบ:</strong> {topic.analogy.text}
+                      💡 <strong>เปรียบเทียบให้เห็นภาพ:</strong> {topic.analogy.text}
+                    </div>
+
+                    {/* 🌟 USER ADVANTAGE & SUPERPOWER HIGHLIGHT BOX */}
+                    <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-[#0d1f18] to-slate-900 border border-emerald-800/60 space-y-3.5">
+                      <div className="flex items-center justify-between flex-wrap gap-2">
+                        <span className="text-xs font-bold text-emerald-300 uppercase tracking-wider flex items-center space-x-1.5 font-mono">
+                          <span>🌟 ประโยชน์ & ความได้เปรียบเมื่อคุณทำระดับนี้เป็น:</span>
+                        </span>
+                        <span className="text-xs font-semibold px-2.5 py-0.5 rounded bg-emerald-900/70 text-emerald-200 border border-emerald-700/80">
+                          ⚡ {topic.userAdvantage.timeSaved}
+                        </span>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        {topic.userAdvantage.benefits.map((b, bIdx) => (
+                          <div
+                            key={bIdx}
+                            className="p-3 rounded-xl bg-[#060911]/80 border border-emerald-900/40 space-y-1"
+                          >
+                            <h5 className="text-xs font-bold text-white">
+                              {b.title}
+                            </h5>
+                            <p className="text-[11px] text-slate-300 leading-relaxed">
+                              {b.desc}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+
+                      <p className="text-xs text-emerald-200/90 font-medium italic pt-1 border-t border-emerald-900/50">
+                        "{topic.userAdvantage.unlockQuote}"
+                      </p>
                     </div>
 
                     {/* Quick Link for Level 3 */}
                     {topic.level === 3 && (
-                      <div className="p-3 rounded-xl bg-purple-950/40 border border-purple-800/60 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+                      <div className="p-3.5 rounded-xl bg-purple-950/40 border border-purple-800/60 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
                         <span className="text-purple-200 font-medium">
                           ✨ อยากมีเลขา AI ประจำตัวที่รู้ใจ 24 ชม. โดยไม่ต้องเขียนโค้ด?
                         </span>
                         <button
                           onClick={() => setSession2Tab("secretary")}
-                          className="px-3 py-1.5 bg-purple-600 hover:bg-purple-500 text-white rounded-lg font-bold flex items-center space-x-1 shrink-0 transition"
+                          className="px-3.5 py-1.5 bg-purple-600 hover:bg-purple-500 text-white rounded-lg font-bold flex items-center space-x-1 shrink-0 transition"
                         >
                           <span>เปิดคู่มือทำเลขา AI 🤖</span>
                         </button>
