@@ -293,6 +293,41 @@ export default function HomeView({ fontSizes }) {
             </div>
           </Link>
         </div>
+
+        {/* 📥 PDF & Print Handbook Banner */}
+        <div className="minimal-card rounded-3xl p-6 sm:p-8 border border-emerald-500/30 bg-gradient-to-r from-emerald-950/40 via-slate-900 to-sky-950/40 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+          <div className="space-y-2 text-center sm:text-left">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold border border-emerald-500/30">
+              <span>📖 หนังสือคู่มือฉบับสมบูรณ์</span>
+            </div>
+            <h3 className="text-xl sm:text-2xl font-bold text-white">
+              ดาวน์โหลดคู่มือ AI ประจำบ้าน (A4 PDF)
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-300 max-w-xl leading-relaxed">
+              รวมเนื้อหา 6 เสาหลักความรู้ AI, บันได 5 ระดับ + สถิติประชากรโลก, วิธีสร้างเลขา AI ส่วนตัว 24 ชม., ตารางสูตรคำสั่ง RTCF และกฎความปลอดภัย พร้อมสั่งพิมพ์ขนาด A4 ทันที
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <a
+              href="/AI_Mastery_Family_Handbook.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold text-sm flex items-center space-x-2 shadow-lg hover:shadow-emerald-500/25 transition"
+            >
+              <span>📥</span>
+              <span>ดาวน์โหลด PDF</span>
+            </a>
+            <a
+              href="/AI_Mastery_Family_Handbook.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 font-semibold text-sm flex items-center space-x-2 transition"
+            >
+              <span>🖨️</span>
+              <span>เปิดเวอร์ชันสั่งพิมพ์</span>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );

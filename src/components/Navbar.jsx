@@ -83,8 +83,20 @@ export default function Navbar({
           </Link>
         </div>
 
-        {/* Quick Tools: Font size & Timer */}
+        {/* Quick Tools: Font size, Handbook & Timer */}
         <div className="flex items-center space-x-2.5">
+          {/* PDF Handbook Link */}
+          <a
+            href="/AI_Mastery_Family_Handbook.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-3 py-1.5 rounded-lg bg-emerald-950/80 hover:bg-emerald-900/90 border border-emerald-500/40 text-xs text-emerald-300 flex items-center space-x-1.5 transition font-semibold"
+            title="เปิดอ่าน / ดาวน์โหลดคู่มือฉบับ PDF (A4 พร้อมพิมพ์)"
+          >
+            <span>📄</span>
+            <span className="hidden sm:inline">คู่มือ PDF</span>
+          </a>
+
           {/* Font Size Toggle */}
           <button
             onClick={() => setFontSizeLevel((prev) => (prev + 1) % 3)}

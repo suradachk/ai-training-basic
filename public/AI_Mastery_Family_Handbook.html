@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>คู่มือ AI ฉบับสมบูรณ์สำหรับครอบครัว & ชีวิตประจำวัน</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&family=Sarabun:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --emerald: #059669;
+      --purple: #7c3aed;
+      --amber: #d97706;
+      --rose: #e11d48;
+      --slate-dark: #0f172a;
+      --slate-card: #1e293b;
+      --slate-light: #f8fafc;
+      --border: #e2e8f0;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Sarabun', sans-serif;
+      color: var(--text-main);
+      background-color: #f1f5f9;
+      line-height: 1.6;
+      font-size: 14px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    h1, h2, h3, h4, h5, .heading {
+      font-family: 'Kanit', sans-serif;
+      font-weight: 600;
+      color: #0f172a;
+      line-height: 1.3;
+    }
+
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Print / PDF Layout */
+    .handbook-container {
+      max-width: 850px;
+      margin: 20px auto;
+      background: #ffffff;
+      padding: 40px 45px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      border-radius: 12px;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 15mm 12mm 15mm 12mm;
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+      .handbook-container {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        border-radius: 0;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .page-break {
+        page-break-before: always;
+        break-before: page;
+      }
+      .avoid-break {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+    }
+
+    /* Print Control Bar */
+    .print-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #0f172a;
+      color: #ffffff;
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      margin-bottom: 20px;
+    }
+
+    .print-btn {
+      background: #0284c7;
+      color: #ffffff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-family: 'Kanit', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+
+    .print-btn:hover {
+      background: #0369a1;
+    }
+
+    /* Header & Cover */
+    .cover-header {
+      text-align: center;
+      padding: 40px 20px 30px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      border-radius: 16px;
+      margin-bottom: 35px;
+      border-bottom: 4px solid var(--primary);
+    }
+
+    .cover-badge {
+      display: inline-block;
+      background: rgba(2, 132, 199, 0.25);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      font-family: 'Kanit', sans-serif;
+    }
+
+    .cover-title {
+      font-size: 28px;
+      color: #ffffff;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .cover-subtitle {
+      font-size: 15px;
+      color: #cbd5e1;
+      max-width: 650px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    /* Section Cards */
+    .section-title {
+      font-size: 20px;
+      color: #0f172a;
+      border-left: 5px solid var(--primary);
+      padding-left: 12px;
+      margin-top: 30px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+    }
+
+    .card-highlight {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+    }
+
+    .card-primary {
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+    }
+
+    .card-emerald {
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+    }
+
+    .card-purple {
+      background: #faf5ff;
+      border: 1px solid #e9d5ff;
+    }
+
+    .card-amber {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+    }
+
+    .card-rose {
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 13px;
+    }
+
+    th {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 10px 12px;
+      text-align: left;
+      font-family: 'Kanit', sans-serif;
+      font-weight: 500;
+      border: 1px solid #0f172a;
+    }
+
+    td {
+      padding: 9px 12px;
+      border: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    /* Badges & Tags */
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: 'Kanit', sans-serif;
+    }
+
+    .tag-blue { background: #e0f2fe; color: #0369a1; }
+    .tag-emerald { background: #d1fae5; color: #047857; }
+    .tag-purple { background: #ede9fe; color: #6d28d9; }
+    .tag-amber { background: #fef3c7; color: #b45309; }
+    .tag-rose { background: #ffe4e6; color: #be123c; }
+
+    /* Code & Prompt Box */
+    .prompt-box {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      line-height: 1.5;
+      margin: 8px 0;
+      white-space: pre-wrap;
+      border: 1px solid #334155;
+    }
+
+    .quote-box {
+      border-left: 4px solid var(--primary);
+      padding: 10px 16px;
+      background: #f0f9ff;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+      color: #0369a1;
+      font-weight: 500;
+      margin: 12px 0;
+    }
+
+    /* Footer */
+    .handbook-footer {
+      text-align: center;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 16px;
+      margin-top: 30px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Print Action Bar (Hidden when printing) -->
+  <div class="print-bar no-print">
+    <div>
+      <strong style="font-size: 15px;">📖 คู่มือการเรียนรู้ AI สำหรับครอบครัว (AI Family & Mastery Handbook)</strong>
+      <span style="font-size: 12px; color: #94a3b8; margin-left: 10px;">พร้อมพิมพ์หรือบันทึกเป็นไฟล์ PDF ขนาด A4</span>
+    </div>
+    <button onclick="window.print()" class="print-btn">
+      🖨️ พิมพ์เอกสาร / บันทึกเป็น PDF
+    </button>
+  </div>
+
+  <div class="handbook-container">
+
+    <!-- COVER / HEADER -->
+    <div class="cover-header">
+      <span class="cover-badge">💡 Handbook & Learning Guide</span>
+      <h1 class="cover-title">คู่มือ AI ฉบับสมบูรณ์สำหรับครอบครัว & ชีวิตประจำวัน</h1>
+      <p class="cover-subtitle">
+        ทำความเข้าใจ AI แบบง่ายๆ • สรุป 6 เสาหลักความรู้ • บันได 5 ระดับทักษะ • วิธีทำเลขา AI 24 ชม. • ตัวอย่างการปรับใช้จริงในบ้าน
+      </p>
+    </div>
+
+    <!-- INTRODUCTION: MANIFESTO -->
+    <div class="card card-highlight avoid-break">
+      <h3 class="heading" style="color: #0284c7; margin-bottom: 6px;">💡 ทำไมพวกเราทุกคนถึงต้องเริ่มใช้ AI กันได้แล้ว?</h3>
+      <p style="font-size: 13.5px; color: #334155; line-height: 1.6;">
+        เพราะอีกหน่อย <strong>"ทุกอย่างรอบตัวจะใช้ AI ทั้งหมด"</strong> เหมือนยุคที่ทุกคนต้องหัดใช้สมาร์ตโฟน การเรียนรู้ AI ไม่ใช่เรื่องไกลตัว ไม่ต้องเขียนโปรแกรมเป็น แค่พูดคุยภาษาไทยธรรมดา เราก็สามารถมี <strong>"เด็กฝึกงานอัจฉริยะที่อ่านหนังสือมาทั้งโลก"</strong> คอยช่วยงานบ้าน ติวลูกหลาน ดูแลสุขภาพ และประหยัดเวลาทำงานวันละหลายชั่วโมง
+      </p>
+      <div class="quote-box" style="margin-top: 10px;">
+        "AI ไม่ได้มาแทนคนเราหรอกครับ... แต่ 'คนที่ใช้ AI เป็น' จะใช้ชีวิตและทำงานได้สบายกว่าคนที่ไม่ยอมแตะมันเลย"
+      </div>
+    </div>
+
+    <!-- SECTION 1: 6 CORE PILLARS OVERVIEW -->
+    <div class="page-break"></div>
+    <h2 class="section-title">
+      <span>🌟 หมวดที่ 1: 6 เสาหลักความรู้ AI ครบวงจร (AI 360° Overview)</span>
+      <span class="tag tag-blue">พื้นฐานสำคัญ</span>
+    </h2>
+
+    <div class="grid-2">
+      <!-- Pillar 1 -->
+      <div class="card avoid-break">
+        <h3 class="heading" style="font-size: 15px; color: #0284c7; margin-bottom: 4px;">01. AI คืออะไร?</h3>
+        <p style="font-size: 12.5px; color: #64748b; margin-bottom: 8px;">เปรียบเหมือน "เด็กฝึกงานอัจฉริยะ" ที่รู้ทุกเรื่อง แต่ต้องมีคนสั่งงาน</p>
+        <ul style="font-size: 12.5px; padding-left: 16px; color: #334155; line-height: 1.5;">
+          <li><strong>Gen AI (แบบใหม่):</strong> สร้างสรรค์สิ่งใหม่ได้เอง เช่น เขียนบทความ วาดรูป แต่งเพลง</li>
+          <li><strong>การเดาคำ (Next-token):</strong> AI ไม่ได้คิดเหมือนคน แต่คำนวณคำถัดไปที่น่าจะถูกต้องที่สุด</li>
+          <li><strong>ระวังภาพหลอน (Hallucination):</strong> เรื่องไหนไม่รู้ AI จะเดาอย่างมั่นใจ ต้อง Fact-Check เสมอ</li>
+        </ul>
+      </div>
+
+      <!-- Pillar 2 -->
+      <div class="card avoid-break">
+        <h3 class="heading" style="font-size: 15px; color: #7c3aed; margin-bottom: 4px;">02. AI ทำอะไรได้บ้าง?</h3>
+        <p style="font-size: 12.5px; color: #64748b; margin-bottom: 8px;">ครบทั้ง 6 มิติงานในชีวิตประจำวัน</p>
+        <ul style="font-size: 12.5px; padding-left: 16px; color: #334155; line-height: 1.5;">
+          <li><strong>ภาษา:</strong> สรุปเอกสาร 50 หน้าใน 10 วินาที, ร่างอีเมล, แปลภาษา</li>
+          <li><strong>รูปภาพ & วิดีโอ:</strong> เสกภาพจากจินตนาการ, ทำคลิปเคลื่อนไหว</li>
+          <li><strong>ดนตรี & เสียง:</strong> แต่งเพลงพร้อมเสียงร้อง, เลียนเสียงพูด</li>
+          <li><strong>ตัวเลข & เว็บไซต์:</strong> เขียนสูตร Excel, สรุปยอดขาย, ทำหน้าเว็บใช้เอง</li>
+        </ul>
+      </div>
+
+      <!-- Pillar 3 -->
+      <div class="card avoid-break">
+        <h3 class="heading" style="font-size: 15px; color: #059669; margin-bottom: 4px;">03. ตอนนี้ AI เก่งไปถึงไหนแล้ว?</h3>
+        <p style="font-size: 12.5px; color: #64748b; margin-bottom: 8px;">5 ความสามารถสุดว้าวในยุคปัจจุบัน</p>
+        <ul style="font-size: 12.5px; padding-left: 16px; color: #334155; line-height: 1.5;">
+          <li><strong>Voice & Vision:</strong> เปิดไมค์คุยเสียงสด และเปิดกล้องส่องถามเรื่องรอบตัว</li>
+          <li><strong>Deep Reasoning:</strong> ระบบคิดรอบคอบทีละสเต็ปก่อนตอบ ลดการตอบมั่ว</li>
+          <li><strong>Autonomous Agents:</strong> สั่งงานให้ AI เปิดโฟลเดอร์และแก้ไฟล์ในคอมแทนเรา</li>
+          <li><strong>Humanoid Robots:</strong> สมอง AI เข้าไปอยู่ในหุ่นยนต์ช่วยงานบ้าน</li>
+        </ul>
+      </div>
+
+      <!-- Pillar 4 -->
+      <div class="card avoid-break">
+        <h3 class="heading" style="font-size: 15px; color: #e11d48; margin-bottom: 4px;">04. AI กับชีวิตประจำวัน & ครอบครัว</h3>
+        <p style="font-size: 12.5px; color: #64748b; margin-bottom: 8px;">เพื่อนคู่คิดประจำบ้าน ดูแลสุขภาพ และคนในบ้าน</p>
+        <ul style="font-size: 12.5px; padding-left: 16px; color: #334155; line-height: 1.5;">
+          <li><strong>สุขภาพ:</strong> แปลผลตรวจเลือดเป็นภาษาชาวบ้าน, คิดเมนูอาหารเบาหวาน</li>
+          <li><strong>ต้านมิจฉาชีพ:</strong> สแกน SMS หลอกลวง, Fact-check ข่าวลือใน LINE</li>
+          <li><strong>งานบ้าน:</strong> คิดเมนูก้นตู้เย็นใน 3 วินาที, แพลนเที่ยว 3 รุ่น</li>
+          <li><strong>ติวการบ้าน:</strong> ติวเตอร์ใจดี 24 ชม., ซ้อมพูดภาษาอังกฤษ</li>
+        </ul>
+      </div>
+
+      <!-- Pillar 5 -->
+      <div class="card avoid-break">
+        <h3 class="heading" style="font-size: 15px; color: #d97706; margin-bottom: 4px;">05. AI กับการทำงาน</h3>
+        <p style="font-size: 12.5px; color: #64748b; margin-bottom: 8px;">ทำงานเสร็จไวขึ้น 10 เท่า เหนื่อยน้อยลง มีเวลาพัก</p>
+        <ul style="font-size: 12.5px; padding-left: 16px; color: #334155; line-height: 1.5;">
+          <li><strong>เอกสาร:</strong> สรุปประชุมเป็น Action Items, ร่างอีเมลสุภาพ</li>
+          <li><strong>ตัวเลข:</strong> เขียนสูตร Excel XLOOKUP ซับซ้อนใน 5 วินาที</li>
+          <li><strong>พรีเซนต์:</strong> ช่วยวางโครงเรื่องสไลด์และประเด็นเด็ด</li>
+          <li><strong>ระบบงาน:</strong> สร้างหน้าเว็บรับออเดอร์ร้านค้าแบบง่ายๆ</li>
+        </ul>
+      </div>
+
+      <!-- Pillar 6 -->
+      <div class="card avoid-break">
+        <h3 class="heading" style="font-size: 15px; color: #4338ca; margin-bottom: 4px;">06. AI ในอนาคต & 4 ทักษะมนุษย์</h3>
+        <p style="font-size: 12.5px; color: #64748b; margin-bottom: 8px;">ทักษะสำคัญที่ AI ไม่มีวันมาแทนที่มนุษย์ได้</p>
+        <ul style="font-size: 12.5px; padding-left: 16px; color: #334155; line-height: 1.5;">
+          <li><strong>1. สั่งงานเป็น:</strong> บอกเป้าหมายและบริบทชัดเจนเหมือนหัวหน้างาน</li>
+          <li><strong>2. รู้จักตรวจเช็ก:</strong> ใช้สติและวิจารณญาณ Fact-Check เสมอ</li>
+          <li><strong>3. ความคิดสร้างสรรค์ & รสนิยม:</strong> เอกลักษณ์เฉพาะตัวของมนุษย์</li>
+          <li><strong>4. ความรัก & ความเข้าอกเข้าใจ:</strong> มิตรภาพและความอบอุ่นในบ้าน</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 2: 5 AI LEVELS & GLOBAL PYRAMID -->
+    <div class="page-break"></div>
+    <h2 class="section-title">
+      <span>🪜 หมวดที่ 2: บันได 5 ระดับ AI (5 AI Levels Mastery)</span>
+      <span class="tag tag-emerald">สถิติโลก & ความได้เปรียบ</span>
+    </h2>
+
+    <!-- Global Adoption Table -->
+    <div class="card card-highlight avoid-break">
+      <h3 class="heading" style="font-size: 15px; margin-bottom: 8px; color: #0f172a;">📊 พีระมิดสถิติผู้ใช้งาน AI ทั่วโลก (Global AI Adoption Pyramid)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 15%;">ระดับ</th>
+            <th style="width: 15%;">% ผู้ใช้ทั่วโลก</th>
+            <th style="width: 30%;">สิ่งที่ทำได้</th>
+            <th style="width: 40%;">ประโยชน์ & ความได้เปรียบเมื่อทำเป็น (Superpowers)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color: #059669;">Level 5</strong><br><span class="tag tag-emerald">Autonomous</span></td>
+            <td><strong>&lt; 0.5%</strong><br><small>Top 0.5% ของโลก</small></td>
+            <td>สั่ง AI Agent (Antigravity) เปิดไฟล์ แก้โค้ด และรันงานในเครื่องอัตโนมัติ</td>
+            <td><strong>ทำงานไวกว่าคนทั่วไป 10-100 เท่า</strong> มีกองทัพผู้ช่วยดิจิทัลรันงานซับซ้อนให้ 24 ชม. ไร้คู่แข่ง</td>
+          </tr>
+          <tr>
+            <td><strong style="color: #d97706;">Level 4</strong><br><span class="tag tag-amber">Creator</span></td>
+            <td><strong>~1.5%</strong><br><small>Top 2% ของโลก</small></td>
+            <td>สั่ง AI สร้างหน้าเว็บ Single-file (index.html) และแก้ Error F12 เองได้</td>
+            <td><strong>สร้างเครื่องมือและเว็บใช้เองใน 5 นาที</strong> ประหยัดค่าจ้างทำระบบหลักหมื่นหลักแสน</td>
+          </tr>
+          <tr>
+            <td><strong style="color: #7c3aed;">Level 3</strong><br><span class="tag tag-purple">Power User</span></td>
+            <td><strong>~5%</strong><br><small>Top 7% ของโลก</small></td>
+            <td>สร้างผู้ช่วยส่วนตัว Custom GPTs / Memory จำประวัติและสไตล์เรา</td>
+            <td><strong>มีเลขาฯ ประจำตัว 24 ชม. ฟรี</strong> ไม่ต้องสั่งใหม่ทุกวัน ลดภาระงานซ้ำซากเป็นศูนย์</td>
+          </tr>
+          <tr>
+            <td><strong style="color: #4338ca;">Level 2</strong><br><span class="tag tag-blue">Practitioner</span></td>
+            <td><strong>~18%</strong><br><small>Top 25% ของโลก</small></td>
+            <td>สั่งงานคมชัดด้วยสูตร R-T-C-F + เทคนิค Few-Shot และ Step-by-Step</td>
+            <td><strong>ได้ผลงานเป๊ะในรอบเดียว</strong> ประหยัดเวลาแก้คำสั่งซ้ำ 5 เท่า คุมความถูกต้องได้ 100%</td>
+          </tr>
+          <tr>
+            <td><strong style="color: #0284c7;">Level 1</strong><br><span class="tag tag-blue">Beginner</span></td>
+            <td><strong>~75%</strong><br><small>ประชากรส่วนใหญ่</small></td>
+            <td>พิมพ์ถามตอบภาษาคน สรุปบทความ 20 หน้าใน 10 วินาที + Fact-Check</td>
+            <td><strong>ประหยัดเวลาอ่านข้อมูล 80%</strong> ไม่ต้องเปิด 10 เว็บใน Google มีเกราะกันข่าวปลอม</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 5 Levels Breakdown -->
+    <div class="avoid-break card card-primary">
+      <h3 class="heading" style="color: #0369a1; font-size: 15px;">Level 1: ถามตอบ & ใช้แทน Google (75% ของโลก)</h3>
+      <p style="font-size: 13px; color: #334155; margin-top: 4px;">
+        • <strong>วิธีใช้:</strong> พิมพ์ถามภาษาพูดธรรมดา เช่น "สรุปบทความนี้ให้เหลือ 3 ข้อ" หรือ "วางแผนเที่ยว 2 วัน 1 คืน"<br>
+        • <strong>กฎสำคัญ:</strong> อย่าเพิ่งเชื่อ 100% ให้ตรวจเช็ก (Fact-Check) ข้อมูลสำคัญเสมอ
+      </p>
+    </div>
+
+    <div class="avoid-break card card-purple">
+      <h3 class="heading" style="color: #6d28d9; font-size: 15px;">Level 2: สั่งงานคมชัด ด้วยสูตร R-T-C-F (18% ของโลก)</h3>
+      <p style="font-size: 13px; color: #334155; margin-top: 4px;">
+        • <strong>สูตร R-T-C-F:</strong> [Role] บทบาท + [Task] งานที่สั่ง + [Context] บริบท/เงื่อนไข + [Format] รูปแบบผลลัพธ์<br>
+        • <strong>ตัวอย่าง:</strong> "[Role] คุณคือติวเตอร์ใจดี [Task] อธิบายเรื่องฟิสิกส์ [Context] สำหรับเด็ก 12 ขวบ [Format] ขอตารางสรุป 3 ข้อ"
+      </p>
+    </div>
+
+    <div class="avoid-break card card-purple">
+      <h3 class="heading" style="color: #7c3aed; font-size: 15px;">Level 3: สร้างผู้ช่วยส่วนตัว Custom AI Assistant (5% ของโลก)</h3>
+      <p style="font-size: 13px; color: #334155; margin-top: 4px;">
+        • <strong>วิธีใช้:</strong> ตั้งค่าใน Custom Instructions / Memory ว่า "ฉันเป็นใคร + สไตล์คำตอบที่ชอบ"<br>
+        • <strong>ผลลัพธ์:</strong> AI จำได้ตลอดไป ไม่ต้องเกริ่นประวัติส่วนตัวใหม่ทุกครั้ง
+      </p>
+    </div>
+
+    <div class="avoid-break card card-amber">
+      <h3 class="heading" style="color: #b45309; font-size: 15px;">Level 4: สั่ง AI สร้างชิ้นงาน & ทำหน้าเว็บ (1.5% ของโลก)</h3>
+      <p style="font-size: 13px; color: #334155; margin-top: 4px;">
+        • <strong>เทคนิค Single-file:</strong> สั่ง AI รวม HTML + Tailwind CSS + JavaScript ในไฟล์ <code>index.html</code> ไฟล์เดียว ดับเบิลคลิกเปิดเล่นได้ทันที<br>
+        • <strong>สูตรแก้ Error (F12):</strong> กดปุ่ม F12 บนคีย์บอร์ด &gt; ก๊อปปี้ตัวหนังสือสีแดงใน Console ให้ AI ซ่อมให้ใน 10 วินาที
+      </p>
+    </div>
+
+    <div class="avoid-break card card-emerald">
+      <h3 class="heading" style="color: #047857; font-size: 15px;">Level 5: นายของ AI & Autonomous Agents (&lt; 0.5% ของโลก)</h3>
+      <p style="font-size: 13px; color: #334155; margin-top: 4px;">
+        • <strong>Antigravity / AI Agent:</strong> สั่งงานระดับภาพรวม (Goal-Oriented) ให้ Agent วางแผน เปิดโฟลเดอร์ และแก้ไขไฟล์ในเครื่องแทนเราอัตโนมัติ
+      </p>
+    </div>
+
+    <!-- SECTION 3: 24/7 AI SECRETARY GUIDE -->
+    <div class="page-break"></div>
+    <h2 class="section-title">
+      <span>🤖 หมวดที่ 3: วิธีทำเลขา AI ส่วนตัว 24 ชม. (ฉบับคนไม่เขียนโค้ด)</span>
+      <span class="tag tag-purple">ทำได้ทุกคน</span>
+    </h2>
+
+    <div class="card card-highlight avoid-break">
+      <h3 class="heading" style="font-size: 15px; margin-bottom: 6px;">🚀 ข้อความเปิดตัวเลขา AI ใน 30 วินาที (ก๊อปปี้ไปส่งใน ChatGPT / Gemini)</h3>
+      <div class="prompt-box">"ช่วยทำหน้าที่เป็นเลขาประจำตัวฉันหน่อยนะ ฉันชื่อ [ชื่อของคุณ] ทำงาน [ระบุงาน/สถานะ] ชอบคำตอบกระชับ เข้าใจง่าย สรุปเป็นข้อๆ ถ้าเข้าใจแล้ว แนะนำตัวเองสั้นๆ 1 ประโยคพร้อมบอกว่าพร้อมช่วยงานอะไรบ้าง"</div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card avoid-break">
+        <h4 class="heading" style="color: #0369a1; font-size: 14px;">💼 1. เลขาฝ่ายงานเอกสาร & สรุปไลน์</h4>
+        <p style="font-size: 12px; color: #64748b; margin-bottom: 6px;">สำหรับคนทำงาน & ธุรกิจส่วนตัว</p>
+        <div class="prompt-box">"เธอคือเลขาประจำตัวฉัน เวลาฉันส่งโน้ตประชุมชุ่ยๆ มา ให้เรียบเรียงเป็นข้อความทางการ สุภาพ และสรุปเป็นตาราง Action Items ว่าใครต้องทำอะไรต่อ และกำหนดส่งเมื่อไหร่"</div>
+      </div>
+
+      <div class="card avoid-break">
+        <h4 class="heading" style="color: #b45309; font-size: 14px;">🍲 2. เลขาฝ่ายงานบ้าน & โภชนาการ</h4>
+        <p style="font-size: 12px; color: #64748b; margin-bottom: 6px;">สำหรับพ่อบ้าน แม่บ้าน & คนรักสุขภาพ</p>
+        <div class="prompt-box">"เธอคือเลขาผู้จัดการบ้านประจำตัวฉัน ฉันมีงบจำกัด เวลาฉันถามเรื่องกับข้าว ให้เน้นเมนูทำง่าย ใช้วัตถุดิบเหลือในตู้เย็น ทำเสร็จใน 15-20 นาที และสรุปวิธีทำสั้นๆ เสมอ"</div>
+      </div>
+
+      <div class="card avoid-break">
+        <h4 class="heading" style="color: #047857; font-size: 14px;">🎓 3. เลขาฝ่ายการเรียน & ติวลูกหลาน</h4>
+        <p style="font-size: 12px; color: #64748b; margin-bottom: 6px;">สำหรับนักเรียน นักศึกษา & ผู้ปกครอง</p>
+        <div class="prompt-box">"เธอคือครูติวเตอร์ใจดี เวลาฉันหรือลูกถามโจทย์ยากๆ ขอให้อธิบายด้วยภาษาง่ายๆ มีตัวอย่างเปรียบเทียบ และใช้วิธีตั้งคำถามใบ้นำทางทีละสเต็ป อย่าเพิ่งเฉลยคำตอบทันที"</div>
+      </div>
+
+      <div class="card avoid-break">
+        <h4 class="heading" style="color: #be123c; font-size: 14px;">🛡️ 4. เลขาความปลอดภัย & ตรวจข่าวปลอม</h4>
+        <p style="font-size: 12px; color: #64748b; margin-bottom: 6px;">สำหรับผู้สูงอายุ & ทุกคนในบ้าน</p>
+        <div class="prompt-box">"เธอคือเลขาตรวจจับมิจฉาชีพ เวลาฉันส่ง SMS ลิงก์ หรือข้อความ LINE มา ช่วยวิเคราะห์ว่าเสี่ยงโกงกี่ % ชี้จุดอันตราย และสรุปคำเตือนสุภาพ 2 บรรทัดให้ฉันก๊อปปี้ไปเตือนคนในบ้าน"</div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: REAL-LIFE ADAPTATION & PROMPTS -->
+    <div class="page-break"></div>
+    <h2 class="section-title">
+      <span>🏠 หมวดที่ 4: ตัวอย่างการปรับใช้ในชีวิตจริง 4 มิติ</span>
+      <span class="tag tag-amber">Prompt พร้อมใช้</span>
+    </h2>
+
+    <div class="grid-2">
+      <!-- Pillar 1: Home -->
+      <div class="card card-amber avoid-break">
+        <h4 class="heading" style="color: #b45309; font-size: 14px;">🍲 1. ในบ้าน & ชีวิตประจำวัน</h4>
+        <p style="font-size: 12px; color: #334155; margin-bottom: 6px;"><strong>เมนูก้นตู้เย็นใน 3 วินาที:</strong></p>
+        <div class="prompt-box">"ในตู้เย็นมี: อกไก่ 2 ชิ้น, กะหล่ำปลีครึ่งหัว, ไข่ 2 ฟอง ช่วยคิด 2 เมนูอาหารเย็นทำง่ายใน 15 นาที พร้อมวิธีทำสั้นๆ"</div>
+        <p style="font-size: 12px; color: #334155; margin-top: 8px; margin-bottom: 6px;"><strong>แปลงคำบ่นเป็นพลังบวก (NVC):</strong></p>
+        <div class="prompt-box">"ช่วยแปลงคำว่า 'กินแล้วทำไมไม่เก็บสักที' ให้เป็นคำพูดที่นุ่มนวลแต่ได้ผล 3 แบบ ไม่ชวนทะเลาะในบ้าน"</div>
+      </div>
+
+      <!-- Pillar 2: Learning -->
+      <div class="card card-primary avoid-break">
+        <h4 class="heading" style="color: #0369a1; font-size: 14px;">🎓 2. การเรียน & ติวลูกหลาน</h4>
+        <p style="font-size: 12px; color: #334155; margin-bottom: 6px;"><strong>สรุปชีทเรียน 50 หน้าเหลือ 1 หน้า:</strong></p>
+        <div class="prompt-box">"ช่วยสรุปเนื้อหาเรื่อง [ระบุวิชา] ให้เหลือ 5 ข้อสำคัญ พร้อมตารางเปรียบเทียบคำศัพท์ที่มักจำสลับกัน"</div>
+        <p style="font-size: 12px; color: #334155; margin-top: 8px; margin-bottom: 6px;"><strong>ซ้อมคุยภาษาอังกฤษเสียงสด (Voice Mode):</strong></p>
+        <div class="prompt-box">"Let's roleplay! You are a barista in London. I am ordering coffee. Reply in short sentences and give me 1 tip to sound more natural."</div>
+      </div>
+
+      <!-- Pillar 3: Work -->
+      <div class="card card-emerald avoid-break">
+        <h4 class="heading" style="color: #047857; font-size: 14px;">💼 3. การทำงาน & ธุระประจำวัน</h4>
+        <p style="font-size: 12px; color: #334155; margin-bottom: 6px;"><strong>สรุปบันทึกการประชุม & Action Items:</strong></p>
+        <div class="prompt-box">"ช่วยสรุปข้อความการประชุมนี้ ให้เป็นตาราง: 1) เรื่องที่ตกลง 2) Action Item 3) ผู้รับผิดชอบ 4) กำหนดส่ง"</div>
+        <p style="font-size: 12px; color: #334155; margin-top: 8px; margin-bottom: 6px;"><strong>เขียนสูตร Excel ที่จำไม่ได้:</strong></p>
+        <div class="prompt-box">"ฉันมี Excel คอลัมน์ A เป็นชื่อ คอลัมน์ B เป็นยอดขาย อยากได้สูตรหาคนที่มียอดขายสูงสุด 3 อันดับแรก ช่วยเขียนสูตรและอธิบายวิธีใช้"</div>
+      </div>
+
+      <!-- Pillar 4: Health & Safety -->
+      <div class="card card-rose avoid-break">
+        <h4 class="heading" style="color: #be123c; font-size: 14px;">🛡️ 4. สุขภาพ & ต้านมิจฉาชีพ</h4>
+        <p style="font-size: 12px; color: #334155; margin-bottom: 6px;"><strong>แปลผลตรวจเลือดให้พ่อแม่เข้าใจง่าย:</strong></p>
+        <div class="prompt-box">"ช่วยอธิบายผลตรวจเลือดด้านล่างให้คุณแม่อายุ 60 ปีเข้าใจง่ายๆ: [วางค่า เช่น FBS 115, LDL 140] บอกค่าที่เกินเกณฑ์ และ 3 คำถามที่ควรเตรียมไปถามแพทย์"</div>
+        <p style="font-size: 12px; color: #334155; margin-top: 8px; margin-bottom: 6px;"><strong>สแกน SMS / ลิงก์หลอกลวง:</strong></p>
+        <div class="prompt-box">"ฉันได้รับข้อความ: '[วางข้อความ SMS]' ช่วยวิเคราะห์ว่าเป็นมิจฉาชีพกี่ % มีสัญญาณอันตรายตรงไหน และวิธีปฏิบัติตนเพื่อความปลอดภัย"</div>
+      </div>
+    </div>
+
+    <!-- SECTION 5: SAFETY RULES -->
+    <div class="card card-highlight avoid-break" style="margin-top: 16px;">
+      <h3 class="heading" style="font-size: 15px; color: #e11d48; margin-bottom: 8px;">🛡️ กฎเหล็ก 4 ข้อในการใช้ AI อย่างปลอดภัย</h3>
+      <div class="grid-2" style="font-size: 12.5px; color: #334155;">
+        <div><strong>1. ห้ามใส่ข้อมูลส่วนตัวสำคัญ:</strong> ไม่กรอกเลขบัตรประชาชน เลขบัญชีธนาคาร หรือรหัสผ่านลงในแชท AI</div>
+        <div><strong>2. สุขภาพต้องพบแพทย์จริง:</strong> AI ช่วยหาข้อมูลเบื้องต้นได้ แต่การวินิจฉัยและสั่งยาต้องผ่านแพทย์เสมอ</div>
+        <div><strong>3. Fact-Check ก่อนแชร์:</strong> ข้อความลูกโซ่ใน LINE ให้ส่งมาถาม AI หรือตรวจสอบศูนย์ต่อต้านข่าวปลอมก่อนส่งต่อ</div>
+        <div><strong>4. คนเป็นหัวหน้า AI เป็นลูกน้อง:</strong> ผลงานและการตัดสินใจขั้นสุดท้าย อยู่ที่การตรวจทานของพวกเราเสมอ</div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="handbook-footer">
+      <p>จัดทำโดย <strong>AI Training Basic Project</strong> • คู่มือถ่ายทอดความรู้ AI สู่ครอบครัวและชีวิตประจำวัน</p>
+      <p style="margin-top: 4px;">สามารถเปิดอ่านผ่านเว็บแอป หรือพิมพ์เป็นเอกสาร PDF สำหรับใช้อบรมในบ้านและชุมชน</p>
+    </div>
+
+  </div>
+
+</body>
+</html>
