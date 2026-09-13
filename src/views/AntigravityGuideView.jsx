@@ -25,6 +25,17 @@ import {
   HeartHandshake,
   Layers,
   FileCode,
+  Download,
+  Terminal,
+  Play,
+  Square,
+  BookOpen,
+  Cpu,
+  Settings,
+  Flame,
+  FileText,
+  MousePointerClick,
+  Laptop,
 } from "lucide-react";
 
 const NOCODE_PROJECT_TEMPLATES = [
@@ -88,6 +99,46 @@ const NOCODE_PROJECT_TEMPLATES = [
   },
 ];
 
+const SKILL_EXAMPLES = [
+  {
+    id: "designer",
+    name: "thai-family-ui",
+    title: "🎨 สกิลดีไซเนอร์ประจำบ้าน (Family UI Designer)",
+    desc: "สอนให้ AI ทุกครั้งที่สร้างเว็บ ต้องใช้ฟอนต์ Kanit ตัวหนังสือใหญ่ สีอบอุ่นสบายตา เหมาะกับผู้ใหญ่",
+    folderPath: ".agents/skills/thai-family-ui/SKILL.md",
+    skillContent: `---
+name: thai-family-ui
+description: สกิลควบคุมการออกแบบหน้าเว็บให้สวยงาม ตัวหนังสือขนาดใหญ่อ่านง่าย เหมาะสำหรับทุกคนในครอบครัว
+---
+
+# Family UI Design Guidelines
+ทุกครั้งที่คุณสร้างหรือแก้ไขหน้าเว็บ ให้ยึดหลักเกณฑ์ต่อไปนี้เสมอ:
+1. **Typography**: นำเข้าและใช้ฟอนต์ภาษาไทย 'Kanit' หรือ 'Prompt' เสมอ
+2. **Font Size**: ตัวหนังสือเนื้อหาหลักต้องไม่เล็กกว่า 16px (text-base) และหัวข้อต้องเด่นชัด
+3. **Color Palette**: ใช้สีโทนสบายตา (Soft Warm / Modern Minimal) ไม่แสบตา
+4. **Button & Touch**: ปุ่มกดต้องมีขนาดใหญ่ (อย่างน้อย py-3 px-5) กดง่ายบนหน้าจอมือถือ
+5. **Language**: ใช้ภาษาไทยที่สุภาพ อบอุ่น เป็นมิตร เข้าใจง่าย ไม่ใช้ศัพท์เทคนิคซับซ้อน`,
+  },
+  {
+    id: "discuss",
+    name: "discuss",
+    title: "🧠 สกิลคู่คิดวิเคราะห์ & ที่ปรึกษาครอบครัว (Discussion Partner)",
+    desc: "สอนให้ AI วิเคราะห์อย่างรอบคอบ เปรียบเทียบข้อดีข้อเสีย และแปลงเรื่องยากให้เป็นภาษาครอบครัว",
+    folderPath: ".agents/skills/discuss/SKILL.md",
+    skillContent: `---
+name: discuss
+description: คู่คิดและที่ปรึกษาเชิงวิเคราะห์ ช่วยคิด เปรียบเทียบ ตกผลึกประเด็น และออกแบบแนวทางให้ทุกคนในครอบครัวเข้าใจ
+---
+
+# Analytical & Discussion Guidelines
+เมื่อผู้ใช้ชวนคุยหรือปรึกษา ให้ดำเนินการดังนี้:
+1. **Multi-Generation Perspective**: มองผ่านแว่นของสมาชิกทุกวัยในบ้าน (ผู้สูงอายุ, คนทำงาน, นักเรียน)
+2. **Value vs Risk**: ชี้ให้เห็นทั้งคุณค่าความคุ้มค่า และข้อควรระวังด้านความปลอดภัย
+3. **Analogy-Driven**: เปรียบเปรยเรื่องยากให้เป็นภาพจำง่ายๆ ในชีวิตประจำวัน
+4. **Actionable Outputs**: ทุกคำแนะนำต้องสรุปเป็นสิ่งที่ลงมือทำได้จริง หรือเป็น Prompt พร้อมใช้`,
+  },
+];
+
 const PROMPT_FIX_CHEATSHEET = [
   {
     category: "🎨 สั่งแก้สี & ปรับขนาดตัวหนังสือ",
@@ -137,7 +188,7 @@ const PROMPT_FIX_CHEATSHEET = [
 ];
 
 export default function AntigravityGuideView({ fontSizes }) {
-  const [activeTab, setActiveTab] = useState("start"); // 'start' | 'templates' | 'builder' | 'cheatsheet' | 'mindset'
+  const [activeTab, setActiveTab] = useState("install"); // 'install' | 'run' | 'skills' | 'templates' | 'builder' | 'cheatsheet'
   const [copiedKey, setCopiedKey] = useState(null);
 
   // Custom Antigravity Prompt Builder State
@@ -166,180 +217,222 @@ export default function AntigravityGuideView({ fontSizes }) {
     <div className="max-w-5xl mx-auto py-8 sm:py-12 space-y-12 animate-fadeIn">
       {/* 🌟 HERO BANNER */}
       <div className="text-center space-y-4">
-        <div className="inline-flex items-center space-x-2 text-xs font-semibold px-4 py-1.5 rounded-full bg-gradient-to-r from-sky-500/20 to-purple-500/20 text-sky-300 border border-sky-500/30 shadow-sm">
+        <div className="inline-flex items-center space-x-2 text-xs font-semibold px-4 py-1.5 rounded-full bg-gradient-to-r from-sky-500/20 via-purple-500/20 to-emerald-500/20 text-sky-300 border border-sky-500/30 shadow-sm">
           <Rocket className="w-4 h-4 text-purple-400 animate-pulse" />
-          <span>Antigravity for Non-Programmers • ฉบับคนไม่เขียนโค้ด</span>
+          <span>Antigravity Master Guide • คู่มือฉบับสมบูรณ์สำหรับคนไม่เขียนโค้ด</span>
         </div>
 
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
-          สั่งสร้างเว็บ & แอปรอบตัวได้ดั่งใจ <br className="hidden sm:inline" />
+          ตั้งแต่ติดตั้งโปรแกรม สั่งรันโค้ด <br className="hidden sm:inline" />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-purple-300 to-emerald-400">
-            โดยไม่ต้องเขียนโค้ดแม้แต่บรรทัดเดียว!
+            จนถึงสร้างแอป & ระบบ Skills ส่วนตัว!
           </span>
         </h1>
 
         <p className="text-sm sm:text-base text-slate-300 max-w-3xl mx-auto leading-relaxed">
-          เปลี่ยนบทบาทของคุณเป็น <strong className="text-white">"ผู้กำกับ / เจ้านาย"</strong> และให้{" "}
-          <strong className="text-sky-300">Google Antigravity</strong> เป็น{" "}
-          <strong className="text-emerald-300">"ทีมโปรแกรมเมอร์และดีไซเนอร์ส่วนตัว"</strong>{" "}
-          แค่พิมพ์บอกความต้องการเป็นภาษาไทย ก็เนรมิตผลงานจริงได้ในไม่กี่นาที
+          คู่มือแบบ Step-by-Step ที่พาคุณเริ่มต้นจาก 0: ติดตั้ง VS Code + Antigravity, เปิดโปรเจกต์, 
+          รันไฟล์ HTML / React / TSX, และสร้าง Custom Skills ให้ AI จดจำสไตล์การทำงานของคุณตลอดไป
         </p>
       </div>
 
-      {/* 🧭 NAVIGATION SUB-TABS */}
+      {/* 🧭 NAVIGATION SUB-TABS (6 CHAPTERS) */}
       <div className="flex items-center space-x-1.5 bg-[#0f172a] p-1.5 rounded-2xl border border-slate-800 overflow-x-auto custom-scrollbar shadow-lg">
         <button
-          onClick={() => setActiveTab("start")}
-          className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center space-x-2 transition whitespace-nowrap ${
-            activeTab === "start"
+          onClick={() => setActiveTab("install")}
+          className={`px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center space-x-1.5 transition whitespace-nowrap ${
+            activeTab === "install"
               ? "bg-sky-600 text-white shadow-md"
               : "text-slate-400 hover:text-white hover:bg-slate-800/60"
           }`}
         >
-          <Zap className="w-4 h-4 text-amber-300" />
-          <span>1. Antigravity คืออะไร & 3 สเต็ปเริ่ม</span>
+          <Download className="w-4 h-4 text-sky-300" />
+          <span>1. ติดตั้ง VS Code & Antigravity</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab("run")}
+          className={`px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center space-x-1.5 transition whitespace-nowrap ${
+            activeTab === "run"
+              ? "bg-emerald-600 text-white shadow-md"
+              : "text-slate-400 hover:text-white hover:bg-slate-800/60"
+          }`}
+        >
+          <Play className="w-4 h-4 text-emerald-300" />
+          <span>2. สร้างโปรเจกต์ & วิธีรันโค้ด</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab("skills")}
+          className={`px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center space-x-1.5 transition whitespace-nowrap ${
+            activeTab === "skills"
+              ? "bg-indigo-600 text-white shadow-md"
+              : "text-slate-400 hover:text-white hover:bg-slate-800/60"
+          }`}
+        >
+          <Cpu className="w-4 h-4 text-indigo-300" />
+          <span>3. สร้าง Skills ประจำตัว 🧠</span>
         </button>
 
         <button
           onClick={() => setActiveTab("templates")}
-          className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center space-x-2 transition whitespace-nowrap ${
+          className={`px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center space-x-1.5 transition whitespace-nowrap ${
             activeTab === "templates"
               ? "bg-purple-600 text-white shadow-md"
               : "text-slate-400 hover:text-white hover:bg-slate-800/60"
           }`}
         >
           <Sparkles className="w-4 h-4 text-purple-300" />
-          <span>2. 5 ไอเดียโปรเจกต์พร้อมคำสั่ง</span>
+          <span>4. 5 ไอเดียโปรเจกต์พร้อมคำสั่ง</span>
         </button>
 
         <button
           onClick={() => setActiveTab("builder")}
-          className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center space-x-2 transition whitespace-nowrap ${
+          className={`px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center space-x-1.5 transition whitespace-nowrap ${
             activeTab === "builder"
-              ? "bg-emerald-600 text-white shadow-md"
+              ? "bg-teal-600 text-white shadow-md"
               : "text-slate-400 hover:text-white hover:bg-slate-800/60"
           }`}
         >
-          <Wand2 className="w-4 h-4 text-emerald-300" />
-          <span>3. เครื่องมือสร้างคำสั่งสั่งทำเว็บ</span>
+          <Wand2 className="w-4 h-4 text-teal-300" />
+          <span>5. เครื่องมือสร้างคำสั่ง</span>
         </button>
 
         <button
           onClick={() => setActiveTab("cheatsheet")}
-          className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center space-x-2 transition whitespace-nowrap ${
+          className={`px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center space-x-1.5 transition whitespace-nowrap ${
             activeTab === "cheatsheet"
               ? "bg-rose-600 text-white shadow-md"
               : "text-slate-400 hover:text-white hover:bg-slate-800/60"
           }`}
         >
           <Sliders className="w-4 h-4 text-rose-300" />
-          <span>4. โพยสั่งแก้งานภาษาคน</span>
+          <span>6. โพยสั่งแก้งาน</span>
         </button>
       </div>
 
       {/* ========================================================================= */}
-      {/* TAB 1: WHAT IS ANTIGRAVITY & 3 STEPS TO START                            */}
+      {/* CHAPTER 1: INSTALLATION (VS CODE + ANTIGRAVITY + NODE.JS)                */}
       {/* ========================================================================= */}
-      {activeTab === "start" && (
+      {activeTab === "install" && (
         <div className="space-y-8 animate-fadeIn">
-          {/* Comparison Card: ChatGPT vs Antigravity */}
-          <div className="minimal-card rounded-3xl p-6 sm:p-8 border border-slate-800 bg-gradient-to-br from-[#0c1427] via-[#080d19] to-[#04060d] space-y-6">
-            <div className="space-y-2">
-              <span className="text-xs font-mono font-bold text-sky-400 uppercase tracking-wider block">
-                บทที่ 1 • เข้าใจพลังที่แท้จริง
-              </span>
-              <h2 className="text-2xl font-bold text-white">
-                ChatGPT ต่างจาก Antigravity อย่างไร? (เข้าใจใน 1 นาที)
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* ChatGPT Side */}
-              <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-3">
-                <div className="flex items-center space-x-2.5 text-slate-300 font-bold text-base">
-                  <Bot className="w-5 h-5 text-slate-400" />
-                  <span>AI แชททั่วไป (เช่น ChatGPT / Gemini)</span>
-                </div>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  เหมือน **"ที่ปรึกษาที่นั่งคุยในห้อง"** เวลาเราถาม มันจะตอบเป็นข้อความหรือโค้ดยาวๆ แต่เราต้องก๊อปปี้ไปสร้างไฟล์ เปิดโปรแกรม และกดรันเองทั้งหมด ถ้าไม่รู้เรื่องคอมพิวเตอร์ก็ไปต่อไม่ถูก
-                </p>
-                <div className="text-xs text-amber-300/90 font-medium pt-2 border-t border-slate-800">
-                  ⚠️ ต้องทำต่อเอง ต้องมีความรู้ติดตั้งโปรแกรม
-                </div>
-              </div>
-
-              {/* Antigravity Side */}
-              <div className="p-5 rounded-2xl bg-gradient-to-br from-sky-950/50 to-purple-950/50 border border-sky-500/40 space-y-3">
-                <div className="flex items-center space-x-2.5 text-sky-300 font-bold text-base">
-                  <Rocket className="w-5 h-5 text-sky-400" />
-                  <span>Google Antigravity (AI Agentic Coding)</span>
-                </div>
-                <p className="text-xs text-slate-200 leading-relaxed">
-                  เหมือน **"ทีมโปรแกรมเมอร์ส่วนตัวที่นั่งข้างโต๊ะคุณ"** เราแค่พูดภาษาไทยบอกสิ่งที่อยากได้ Antigravity จะเปิดโฟลเดอร์ เขียนโค้ด สร้างไฟล์ ออกแบบปุ่ม และเปิดหน้าเว็บให้ดูจริงทันที!
-                </p>
-                <div className="text-xs text-emerald-300 font-bold pt-2 border-t border-sky-500/30 flex items-center space-x-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                  <span>✨ ลงมือทำให้ครบวงจร คนไม่รู้โค้ดก็มีผลงานได้</span>
-                </div>
-              </div>
-            </div>
+          {/* Header */}
+          <div className="minimal-card rounded-3xl p-6 sm:p-8 border border-slate-800 bg-gradient-to-br from-[#0c1427] via-[#080d19] to-[#04060d] space-y-4">
+            <span className="text-xs font-mono font-bold text-sky-400 uppercase tracking-wider block">
+              บทที่ 1 • เตรียมอุปกรณ์ให้พร้อม (Setup 0 to 100)
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white">
+              ติดตั้ง VS Code และ Antigravity ใน 3 ขั้นตอนง่ายๆ
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-3xl">
+              ไม่ต้องกังวลเรื่องเทคนิคยากๆ ครับ เราแค่ต้องดาวน์โหลด 3 สิ่งนี้มาไว้ในเครื่องคอมพิวเตอร์ ทำครั้งเดียวใช้ได้ตลอดไป!
+            </p>
           </div>
 
-          {/* 3 STEPS TO START */}
-          <div className="minimal-card rounded-3xl p-6 sm:p-8 border border-slate-800 space-y-6">
-            <div className="space-y-2">
-              <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider block">
-                บทที่ 2 • วิธีเริ่มต้นใช้งาน
-              </span>
-              <h2 className="text-2xl font-bold text-white">
-                3 ขั้นตอนง่ายๆ สั่ง Antigravity เนรมิตผลงานใน 5 นาที
-              </h2>
+          {/* 3 Installation Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {/* Step 1: VS Code */}
+            <div className="minimal-card rounded-3xl p-6 border border-slate-800 space-y-4 flex flex-col justify-between bg-slate-900/90">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="w-10 h-10 rounded-2xl bg-sky-600/20 border border-sky-500/30 flex items-center justify-center text-sky-400 font-extrabold text-base">
+                    1
+                  </div>
+                  <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-slate-800 text-sky-300">
+                    ฟรี 100%
+                  </span>
+                </div>
+                <h3 className="text-lg font-bold text-white">
+                  ดาวน์โหลด VS Code (โต๊ะทำงาน)
+                </h3>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  เปรียบเหมือน **"โต๊ะเขียนแบบอเนกประสงค์"** ที่เอาไว้เปิดดูไฟล์และหน้าต่างคุยกับ AI
+                </p>
+                <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800 text-xs text-slate-300 space-y-1">
+                  <strong>วิธีทำ:</strong>
+                  <ol className="list-decimal list-inside space-y-1 text-slate-400 text-[11px]">
+                    <li>เข้าเว็บ <a href="https://code.visualstudio.com" target="_blank" rel="noreferrer" className="text-sky-400 underline">code.visualstudio.com</a></li>
+                    <li>กดปุ่มสีฟ้า "Download for Windows/Mac"</li>
+                    <li>เปิดไฟล์ที่โหลดมาแล้วกด "Next" จนเสร็จ</li>
+                  </ol>
+                </div>
+              </div>
+              <a
+                href="https://code.visualstudio.com"
+                target="_blank"
+                rel="noreferrer"
+                className="w-full py-2.5 px-3 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold flex items-center justify-center space-x-2 transition"
+              >
+                <span>เปิดเว็บโหลด VS Code</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* Step 1 */}
-              <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3 relative overflow-hidden">
-                <div className="w-8 h-8 rounded-xl bg-sky-600 text-white font-extrabold flex items-center justify-center text-sm shadow-md">
-                  1
+            {/* Step 2: Node.js */}
+            <div className="minimal-card rounded-3xl p-6 border border-slate-800 space-y-4 flex flex-col justify-between bg-slate-900/90">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="w-10 h-10 rounded-2xl bg-emerald-600/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-extrabold text-base">
+                    2
+                  </div>
+                  <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-slate-800 text-emerald-300">
+                    เครื่องยนต์รันเว็บ
+                  </span>
                 </div>
-                <h3 className="text-base font-bold text-white">เปิดห้องทำงาน</h3>
+                <h3 className="text-lg font-bold text-white">
+                  ดาวน์โหลด Node.js (LTS)
+                </h3>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  สร้างโฟลเดอร์เปล่าในคอมพิวเตอร์ 1 โฟลเดอร์ (เช่น ตั้งชื่อว่า <code className="text-sky-300">my-shop</code>) แล้วเปิด Antigravity ขึ้นมา
+                  เปรียบเหมือน **"เครื่องยนต์"** ที่ช่วยให้คอมพิวเตอร์ของเรารันหน้าเว็บ React / TSX ได้แบบลื่นไหล
                 </p>
-                <div className="text-[11px] text-slate-400 pt-2 border-t border-slate-800 flex items-center space-x-1">
-                  <FolderOpen className="w-3.5 h-3.5 text-sky-400" />
-                  <span>เปรียบเหมือน: เตรียมโต๊ะทำงานให้ทีมงาน</span>
+                <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800 text-xs text-slate-300 space-y-1">
+                  <strong>วิธีทำ:</strong>
+                  <ol className="list-decimal list-inside space-y-1 text-slate-400 text-[11px]">
+                    <li>เข้าเว็บ <a href="https://nodejs.org" target="_blank" rel="noreferrer" className="text-emerald-400 underline">nodejs.org</a></li>
+                    <li>กดเลือกปุ่มเวอร์ชัน <strong>"LTS (Recommended)"</strong></li>
+                    <li>กดติดตั้งตามขั้นตอนปกติ (Next ตลอด)</li>
+                  </ol>
                 </div>
               </div>
+              <a
+                href="https://nodejs.org"
+                target="_blank"
+                rel="noreferrer"
+                className="w-full py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center justify-center space-x-2 transition"
+              >
+                <span>เปิดเว็บโหลด Node.js</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
 
-              {/* Step 2 */}
-              <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3 relative overflow-hidden">
-                <div className="w-8 h-8 rounded-xl bg-purple-600 text-white font-extrabold flex items-center justify-center text-sm shadow-md">
-                  2
+            {/* Step 3: Antigravity Extension / CLI */}
+            <div className="minimal-card rounded-3xl p-6 border border-purple-500/30 space-y-4 flex flex-col justify-between bg-purple-950/20">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="w-10 h-10 rounded-2xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-base">
+                    3
+                  </div>
+                  <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-purple-900/60 text-purple-300 border border-purple-500/30">
+                    หัวใจสำคัญ 🚀
+                  </span>
                 </div>
-                <h3 className="text-base font-bold text-white">สั่งงานเป็นภาษาไทย</h3>
+                <h3 className="text-lg font-bold text-white">
+                  เปิดใช้งาน Antigravity
+                </h3>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  พิมพ์บอกในช่องแชทว่าอยากได้เว็บแบบไหน สีอะไร มีปุ่มอะไรบ้าง เหมือนคุยกับคนทำเว็บทั่วไป
+                  เปรียบเหมือน **"จ้างทีมโปรแกรมเมอร์ AI มานั่งข้างคุณ"** เพื่อรับคำสั่งภาษาไทยแล้วลงมือเขียนเว็บให้
                 </p>
-                <div className="text-[11px] text-slate-400 pt-2 border-t border-slate-800 flex items-center space-x-1">
-                  <MessageSquare className="w-3.5 h-3.5 text-purple-400" />
-                  <span>เปรียบเหมือน: สั่งอาหารตามสั่งแบบระบุเครื่องปรุง</span>
+                <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800 text-xs text-slate-300 space-y-1">
+                  <strong>วิธีเปิดใช้งานใน VS Code:</strong>
+                  <ol className="list-decimal list-inside space-y-1 text-slate-400 text-[11px]">
+                    <li>เปิด VS Code ขึ้นมา</li>
+                    <li>กดไอคอน <strong>Extensions</strong> (รูปสี่เหลี่ยม 4 ชิ้น ด้านซ้าย)</li>
+                    <li>พิมพ์ค้นหา <code>Antigravity</code> แล้วกด Install</li>
+                    <li>กดปุ่มลัด <code>Ctrl + L</code> เพื่อเปิดช่องแชทสั่งงาน!</li>
+                  </ol>
                 </div>
               </div>
-
-              {/* Step 3 */}
-              <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3 relative overflow-hidden">
-                <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white font-extrabold flex items-center justify-center text-sm shadow-md">
-                  3
-                </div>
-                <h3 className="text-base font-bold text-white">ตรวจรับงาน & สั่งปรับแก้</h3>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  ดูหน้าเว็บจริงที่ Antigravity สร้างขึ้น ถ้าอยากเปลี่ยนสี ปรับตัวหนังสือ หรือเพิ่มปุ่ม ก็แค่พิมพ์สั่งต่อได้ทันที!
-                </p>
-                <div className="text-[11px] text-slate-400 pt-2 border-t border-slate-800 flex items-center space-x-1">
-                  <Eye className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>เปรียบเหมือน: เดินตรวจงานแล้วสั่งช่างเก็บรายละเอียด</span>
-                </div>
+              <div className="p-2.5 rounded-xl bg-purple-950/50 border border-purple-500/40 text-[11px] text-purple-200 text-center font-bold">
+                ✨ พร้อมเริ่มสร้างเว็บแรกได้ทันที!
               </div>
             </div>
           </div>
@@ -347,13 +440,240 @@ export default function AntigravityGuideView({ fontSizes }) {
       )}
 
       {/* ========================================================================= */}
-      {/* TAB 2: 5 NO-CODE PROJECT TEMPLATES                                       */}
+      {/* CHAPTER 2: PROJECT CREATION & RUNNING CODE (HTML vs REACT / TSX)          */}
+      {/* ========================================================================= */}
+      {activeTab === "run" && (
+        <div className="space-y-8 animate-fadeIn">
+          {/* Header */}
+          <div className="minimal-card rounded-3xl p-6 sm:p-8 border border-slate-800 bg-gradient-to-br from-[#0c1427] via-[#080d19] to-[#04060d] space-y-4">
+            <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider block">
+              บทที่ 2 • วิธีเปิดไฟล์และรันดูหน้าเว็บจริง
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white">
+              สร้างโฟลเดอร์โปรเจกต์ & วิธีรันดูหน้าเว็บ (HTML เพียวๆ vs React/TSX)
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-3xl">
+              เมื่อ Antigravity เขียนโค้ดให้เราเสร็จแล้ว เราจะเปิดดูผลงานบนหน้าจอได้อย่างไร? มาดู 2 วิธีที่ง่ายที่สุดกันครับ
+            </p>
+          </div>
+
+          {/* Workflow Step 0: Open Folder */}
+          <div className="minimal-card rounded-3xl p-6 border border-slate-800 bg-slate-900/90 space-y-3">
+            <div className="flex items-center space-x-3">
+              <div className="w-9 h-9 rounded-xl bg-sky-600/20 border border-sky-500/30 flex items-center justify-center text-sky-400">
+                <FolderOpen className="w-5 h-5" />
+              </div>
+              <h3 className="text-base sm:text-lg font-bold text-white">
+                สเต็ปที่ 0: วิธีสร้างโฟลเดอร์และเปิดใน VS Code
+              </h3>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-slate-300 pt-1">
+              <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                <span className="font-bold text-sky-400 block mb-1">1. สร้างโฟลเดอร์เปล่า</span>
+                <span>สร้างโฟลเดอร์ใหม่บนหน้า Desktop เช่น <code>my-first-web</code></span>
+              </div>
+              <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                <span className="font-bold text-sky-400 block mb-1">2. เปิดใน VS Code</span>
+                <span>เปิด VS Code แล้วกดเมนู <code>File &gt; Open Folder...</code> แล้วเลือกโฟลเดอร์ที่เพิ่งสร้าง</span>
+              </div>
+              <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                <span className="font-bold text-sky-400 block mb-1">3. เรียก Antigravity</span>
+                <span>กดปุ่ม <code>Ctrl + L</code> เพื่อเปิดช่องแชท แล้วเริ่มพิมพ์สั่งงานภาษาไทยได้เลย!</span>
+              </div>
+            </div>
+          </div>
+
+          {/* 2 Ways Comparison */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Way 1: Pure HTML/CSS */}
+            <div className="minimal-card rounded-3xl p-6 border border-sky-500/30 bg-sky-950/20 space-y-4 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center space-x-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-sky-600/30 border border-sky-500/40 flex items-center justify-center text-sky-400">
+                    <FileCode className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold text-white">แบบที่ 1: ไฟล์ HTML/CSS เพียวๆ</h3>
+                    <span className="text-[11px] text-sky-300">ง่ายที่สุด • ดับเบิ้ลคลิกเปิดดูได้เลย</span>
+                  </div>
+                </div>
+
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  เหมาะสำหรับเว็บหน้าเดียวง่ายๆ เช่น เมนูอาหาร หรือการ์ดอวยพร ที่ไม่ต้องติดตั้งโปรแกรมเสริมใดๆ
+                </p>
+
+                <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-2 text-xs">
+                  <strong className="text-sky-300 block">วิธีเปิดดูหน้าเว็บจริง:</strong>
+                  <ol className="list-decimal list-inside space-y-1 text-slate-300 text-[11px]">
+                    <li>Antigravity จะสร้างไฟล์ชื่อ <code>index.html</code> ในโฟลเดอร์</li>
+                    <li>ในแถบซ้ายของ VS Code: คลิกขวาที่ไฟล์ <code>index.html</code></li>
+                    <li>เลือก <strong>"Reveal in File Explorer"</strong> (เปิดในโฟลเดอร์เครื่อง)</li>
+                    <li>ดับเบิ้ลคลิกที่ไฟล์ <code>index.html</code> หน้าเว็บจะเปิดขึ้นมาใน Chrome หรือ Edge ทันที!</li>
+                  </ol>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-[11px] text-slate-300">
+                💡 <strong>เคล็ดลับ:</strong> ถ้าอยากให้หน้าเว็บอัปเดตอัตโนมัติเวลาแก้โค้ด ให้ติดตั้ง Extension ชื่อ <code>Live Server</code> ใน VS Code แล้วกดคลิก "Go Live" ที่มุมขวาล่าง
+              </div>
+            </div>
+
+            {/* Way 2: React / TSX / Vite */}
+            <div className="minimal-card rounded-3xl p-6 border border-emerald-500/30 bg-emerald-950/20 space-y-4 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center space-x-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-emerald-600/30 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+                    <Code2 className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold text-white">แบบที่ 2: เว็บ React / TSX (Vite)</h3>
+                    <span className="text-[11px] text-emerald-300">สวยงาม ทันสมัย • มีระบบแอปสมบูรณ์</span>
+                  </div>
+                </div>
+
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  เหมาะสำหรับเว็บที่มีการคำนวณ เช่น บันทึกรายรับจ่าย วงล้อหมุนสุ่ม หรือระบบที่มีหลายหน้า
+                </p>
+
+                <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-2 text-xs">
+                  <strong className="text-emerald-300 block">วิธีสั่งรันดูเว็บ (พิมพ์คำสั่งสั้นๆ):</strong>
+                  <ol className="list-decimal list-inside space-y-1 text-slate-300 text-[11px]">
+                    <li>กดปุ่ม <code>Ctrl + `</code> (ปุ่มตัวหนอน) เพื่อเปิดหน้าต่าง Terminal ด้านล่าง</li>
+                    <li>พิมพ์คำสั่ง: <code className="text-emerald-400 font-bold bg-slate-900 px-1.5 py-0.5 rounded">npm run dev</code> แล้วกด Enter</li>
+                    <li>จะเห็นลิงก์สีเขียว เช่น <code>http://localhost:5173</code> ให้กด <strong>Ctrl + คลิก</strong> ที่ลิงก์นั้น</li>
+                    <li>หน้าเว็บจริงจะเปิดขึ้นมาในเบราว์เซอร์ทันที!</li>
+                  </ol>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-[11px] text-slate-300">
+                🛑 <strong>วิธีปิดการรัน:</strong> กดปุ่ม <code>Ctrl + C</code> ในหน้าต่าง Terminal ด้านล่าง เพื่อหยุดรันเว็บ
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* CHAPTER 3: CREATING CUSTOM SKILLS (SOP / SECRET MANUAL)                   */}
+      {/* ========================================================================= */}
+      {activeTab === "skills" && (
+        <div className="space-y-8 animate-fadeIn">
+          {/* Header */}
+          <div className="minimal-card rounded-3xl p-6 sm:p-8 border border-slate-800 bg-gradient-to-br from-[#0c1427] via-[#080d19] to-[#04060d] space-y-4">
+            <span className="text-xs font-mono font-bold text-indigo-400 uppercase tracking-wider block">
+              บทที่ 3 • ติดปีกความฉลาดให้ AI
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white">
+              สร้าง "Skills" ประจำตัว: สอนให้ AI จดจำสไตล์และกฎเกณฑ์ของเรา
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-3xl">
+              เบื่อไหมที่ต้องพิมพ์บอก AI ซ้ำๆ ทุกครั้งว่า *"ขอฟอนต์ Kanit นะ, ขอตัวหนังสือใหญ่นะ, ขอภาษาไทยสุภาพนะ"*? 
+              ฟีเจอร์ <strong>Skills</strong> คือการสร้าง **"สมุดจดสูตรลับประจำบ้าน"** ให้ AI อ่านและทำตามมาตรฐานนี้อัตโนมัติทุกครั้ง!
+            </p>
+          </div>
+
+          {/* How Skills Work Infographic */}
+          <div className="minimal-card rounded-3xl p-6 border border-slate-800 bg-slate-900/90 space-y-4">
+            <h3 className="text-base font-bold text-white flex items-center space-x-2">
+              <Layers className="w-5 h-5 text-indigo-400" />
+              <span>Skills ทำงานอย่างไรใน Antigravity?</span>
+            </h3>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-slate-300">
+              <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-1.5">
+                <div className="text-indigo-400 font-bold">1. สร้างโฟลเดอร์เก็บ Skill</div>
+                <p className="text-slate-400 text-[11px]">
+                  สร้างไฟล์ไว้ที่: <br />
+                  <code className="text-indigo-300">.agents/skills/ชื่อสกิล/SKILL.md</code>
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-1.5">
+                <div className="text-indigo-400 font-bold">2. เขียนกฎที่เราต้องการ</div>
+                <p className="text-slate-400 text-[11px]">
+                  เขียนภาษาไทยบอกสเปก เช่น ฟอนต์ สี สไตล์การตอบ หรือขั้นตอนการทำงาน
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-1.5">
+                <div className="text-indigo-400 font-bold">3. เรียกใช้ได้ทันที</div>
+                <p className="text-slate-400 text-[11px]">
+                  พิมพ์ <code className="text-indigo-300">/ชื่อสกิล</code> หรือสั่งงานตามปกติ AI จะดึงกฎมาใช้อัตโนมัติ!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* 2 Ready-to-use Skill Templates */}
+          <div className="space-y-4">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
+              ตัวอย่าง 2 Skills พร้อมใช้ (ก๊อปปี้ไปสร้างไฟล์ได้เลย):
+            </span>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              {SKILL_EXAMPLES.map((sk) => (
+                <div
+                  key={sk.id}
+                  className="minimal-card rounded-3xl p-6 border border-indigo-500/30 bg-indigo-950/20 space-y-4 flex flex-col justify-between"
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-base font-bold text-white">{sk.title}</h4>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-indigo-900/60 text-indigo-300 border border-indigo-500/30">
+                        /{sk.name}
+                      </span>
+                    </div>
+
+                    <p className="text-xs text-slate-300 leading-relaxed">{sk.desc}</p>
+
+                    <div className="space-y-2 pt-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[11px] font-mono text-indigo-300">
+                          📁 {sk.folderPath}
+                        </span>
+                        <button
+                          onClick={() => handleCopy(sk.skillContent, sk.id)}
+                          className="px-3 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold flex items-center space-x-1.5 transition shadow-sm"
+                        >
+                          {copiedKey === sk.id ? (
+                            <>
+                              <Check className="w-3.5 h-3.5" />
+                              <span>คัดลอกโค้ด Skill แล้ว!</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-3.5 h-3.5" />
+                              <span>คัดลอกเนื้อหา Skill</span>
+                            </>
+                          )}
+                        </button>
+                      </div>
+
+                      <pre className="p-3.5 rounded-2xl bg-slate-950 border border-slate-800 text-[11px] text-slate-300 font-mono whitespace-pre-wrap leading-relaxed max-h-64 overflow-y-auto custom-scrollbar">
+                        {sk.skillContent}
+                      </pre>
+                    </div>
+                  </div>
+
+                  <div className="text-[11px] text-indigo-200/90 pt-2 border-t border-indigo-500/20">
+                    💡 <strong>วิธีสั่ง Antigravity สร้างให้:</strong> พิมพ์บอกว่า *"ช่วยสร้าง skill ชื่อ {sk.name} ตามเนื้อหานี้ให้หน่อย"* Antigravity จะสร้างโฟลเดอร์และไฟล์ให้เสร็จสรรพใน 2 วินาที!
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* CHAPTER 4: 5 NO-CODE PROJECT TEMPLATES                                    */}
       {/* ========================================================================= */}
       {activeTab === "templates" && (
         <div className="space-y-6 animate-fadeIn">
           <div className="space-y-2">
             <span className="text-xs font-mono font-bold text-purple-400 uppercase tracking-wider block">
-              บทที่ 3 • ไอเดียผลงานจริง
+              บทที่ 4 • ไอเดียผลงานจริง
             </span>
             <h2 className="text-2xl font-bold text-white">
               5 ไอเดียโปรเจกต์ที่คนในบ้านสั่งทำได้ทันที (พร้อมคำสั่งก๊อปปี้)
@@ -416,16 +736,16 @@ export default function AntigravityGuideView({ fontSizes }) {
       )}
 
       {/* ========================================================================= */}
-      {/* TAB 3: CUSTOM PROMPT BUILDER FOR ANTIGRAVITY                             */}
+      {/* CHAPTER 5: CUSTOM PROMPT BUILDER FOR ANTIGRAVITY                          */}
       {/* ========================================================================= */}
       {activeTab === "builder" && (
         <div className="minimal-card rounded-3xl p-6 sm:p-8 border border-slate-800 bg-gradient-to-br from-[#0c1427] via-[#080d19] to-[#04060d] space-y-6 shadow-2xl animate-fadeIn">
           <div className="space-y-2 border-b border-slate-800 pb-4">
-            <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider block">
-              เครื่องมือช่วยประกอบคำสั่ง
+            <span className="text-xs font-mono font-bold text-teal-400 uppercase tracking-wider block">
+              บทที่ 5 • เครื่องมือช่วยประกอบคำสั่ง
             </span>
             <h2 className="text-2xl font-bold text-white flex items-center space-x-2">
-              <Wand2 className="w-6 h-6 text-emerald-400" />
+              <Wand2 className="w-6 h-6 text-teal-400" />
               <span>เครื่องมือสร้างคำสั่งสั่ง Antigravity (Prompt Generator)</span>
             </h2>
             <p className="text-xs sm:text-sm text-slate-300">
@@ -443,7 +763,7 @@ export default function AntigravityGuideView({ fontSizes }) {
                 type="text"
                 value={customType}
                 onChange={(e) => setCustomType(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-emerald-500"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-teal-500"
                 placeholder="เช่น เว็บร้านกาแฟ, สมุดบันทึกความดัน"
               />
             </div>
@@ -457,7 +777,7 @@ export default function AntigravityGuideView({ fontSizes }) {
                 type="text"
                 value={customTheme}
                 onChange={(e) => setCustomTheme(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-emerald-500"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-teal-500"
                 placeholder="เช่น โทนสีเขียวพาสเทล, มินิมอลขาวดำ"
               />
             </div>
@@ -471,7 +791,7 @@ export default function AntigravityGuideView({ fontSizes }) {
                 type="text"
                 value={customAudience}
                 onChange={(e) => setCustomAudience(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-emerald-500"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-teal-500"
                 placeholder="เช่น คุณแม่วัยเกษียณ, นักเรียน ม.ปลาย"
               />
             </div>
@@ -485,7 +805,7 @@ export default function AntigravityGuideView({ fontSizes }) {
                 type="text"
                 value={customFeature}
                 onChange={(e) => setCustomFeature(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-emerald-500"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-teal-500"
                 placeholder="เช่น ปุ่มกดแชร์, ตารางคำนวณอัตโนมัติ"
               />
             </div>
@@ -494,12 +814,12 @@ export default function AntigravityGuideView({ fontSizes }) {
           {/* Generated Result */}
           <div className="space-y-2 pt-2">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-emerald-400">
+              <span className="text-xs font-bold text-teal-400">
                 ✨ คำสั่งที่สร้างเสร็จแล้ว (นำไปวางใน Antigravity ได้เลย):
               </span>
               <button
                 onClick={() => handleCopy(customGeneratedPrompt, "custom")}
-                className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold flex items-center space-x-1.5 transition shadow-md"
+                className="px-4 py-2 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 text-white text-xs font-bold flex items-center space-x-1.5 transition shadow-md"
               >
                 {copiedKey === "custom" ? (
                   <>
@@ -523,13 +843,13 @@ export default function AntigravityGuideView({ fontSizes }) {
       )}
 
       {/* ========================================================================= */}
-      {/* TAB 4: PROMPT CHEAT SHEET FOR FIXING & REFINING                          */}
+      {/* CHAPTER 6: PROMPT CHEAT SHEET FOR FIXING & REFINING                       */}
       {/* ========================================================================= */}
       {activeTab === "cheatsheet" && (
         <div className="space-y-6 animate-fadeIn">
           <div className="space-y-2">
             <span className="text-xs font-mono font-bold text-rose-400 uppercase tracking-wider block">
-              บทที่ 4 • โพยสั่งแก้งาน
+              บทที่ 6 • โพยสั่งแก้งาน
             </span>
             <h2 className="text-2xl font-bold text-white">
               คลังประโยคสั่งแก้งานแบบภาษาคน (Prompt Cheat Sheet)
