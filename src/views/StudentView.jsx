@@ -27,6 +27,12 @@ import FamilyAiKnowledgeCard from "../components/FamilyAiKnowledgeCard";
 import AiOverviewSection from "../components/AiOverviewSection";
 import CareerLifeAdaptationCard from "../components/CareerLifeAdaptationCard";
 import AiSecretaryBuilderCard from "../components/AiSecretaryBuilderCard";
+import AILevelQuiz from "../components/AILevelQuiz";
+import VoiceModeGuide from "../components/VoiceModeGuide";
+import FamilyAITools from "../components/FamilyAITools";
+import ScamDefenseSimulator from "../components/ScamDefenseSimulator";
+import { Mic, ShieldAlert, Bot } from "lucide-react";
+
 
 export default function StudentView({ fontSizes }) {
   // Top-level Module Switcher: 'session1' | 'session2' | 'adaptation' | 'family'
@@ -129,6 +135,17 @@ export default function StudentView({ fontSizes }) {
             }`}>
             <HeartPulse className="w-4 h-4 text-rose-300" />
             <span>4. คลังความรู้ในครอบครัว 🏠</span>
+          </button>
+
+          <button
+            onClick={() => setActiveSession("interactive")}
+            className={`px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center space-x-2 transition shadow-sm whitespace-nowrap ${
+              activeSession === "interactive"
+                ? "bg-gradient-to-r from-sky-600 to-emerald-600 text-white shadow-lg"
+                : "bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800"
+            }`}>
+            <Sparkles className="w-4 h-4 text-amber-300" />
+            <span>5. แบบทดสอบ & เครื่องมือ 🎯</span>
           </button>
         </div>
       </div>

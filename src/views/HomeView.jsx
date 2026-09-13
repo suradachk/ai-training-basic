@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   GraduationCap,
@@ -15,9 +15,19 @@ import {
   HeartHandshake,
   Heart,
   Smile,
+  Mic,
+  ShieldAlert,
+  Bot,
+  HelpCircle,
 } from "lucide-react";
+import AILevelQuiz from "../components/AILevelQuiz";
+import VoiceModeGuide from "../components/VoiceModeGuide";
+import FamilyAITools from "../components/FamilyAITools";
+import ScamDefenseSimulator from "../components/ScamDefenseSimulator";
 
 export default function HomeView({ fontSizes }) {
+  const [activeInteractiveTab, setActiveInteractiveTab] = useState("quiz"); // 'quiz' | 'voice' | 'tools' | 'scam'
+
   const manifestoPoints = [
     {
       icon: Globe2,
@@ -45,8 +55,66 @@ export default function HomeView({ fontSizes }) {
     },
   ];
 
+  const aiLevelsSummary = [
+    {
+      level: "Level 1",
+      name: "ถามตอบ & ใช้แทน Google",
+      role: "เด็กฝึกงานที่อ่านหนังสือมาทั้งโลก",
+      usagePercent: "75% ของประชากรโลก",
+      superpower: "เสิร์ชและสรุปเอกสาร 20 หน้าใน 10 วินาที",
+      color: "from-sky-500 to-blue-600",
+      border: "border-sky-500/30",
+      bg: "bg-sky-950/20",
+      text: "text-sky-400",
+    },
+    {
+      level: "Level 2",
+      name: "สั่งงานด้วยสูตร R-T-C-F",
+      role: "สั่งอาหารตามสั่งแบบระบุเครื่องปรุง",
+      usagePercent: "18% ของประชากรโลก",
+      superpower: "ได้คำตอบตรงเป้า 100% ไม่ต้องเดาใจ",
+      color: "from-emerald-500 to-teal-600",
+      border: "border-emerald-500/30",
+      bg: "bg-emerald-950/20",
+      text: "text-emerald-400",
+    },
+    {
+      level: "Level 3",
+      name: "มีเลขา AI ส่วนตัว 24 ชม.",
+      role: "เลขาและที่ปรึกษาส่วนตัวตลอด 24 ชม.",
+      usagePercent: "5% ของประชากรโลก",
+      superpower: "ผู้ช่วยที่จำนิสัย บริบท และงานเราได้แม่นยำ",
+      color: "from-purple-500 to-indigo-600",
+      border: "border-purple-500/30",
+      bg: "bg-purple-950/20",
+      text: "text-purple-400",
+    },
+    {
+      level: "Level 4",
+      name: "รวมร่างเป็นระบบอัตโนมัติ",
+      role: "หัวหน้าฝ่ายที่คุมโรงงานอัตโนมัติ",
+      usagePercent: "1.5% ของประชากรโลก",
+      superpower: "ประหยัดเวลาทั้งสัปดาห์ รันงานเสร็จในคลิกเดียว",
+      color: "from-amber-500 to-orange-600",
+      border: "border-amber-500/30",
+      bg: "bg-amber-950/20",
+      text: "text-amber-400",
+    },
+    {
+      level: "Level 5",
+      name: "ทีมสมองกล Multi-Agent",
+      role: "CEO ผู้บัญชาการกองทัพ AI",
+      usagePercent: "< 0.5% ของประชากรโลก",
+      superpower: "สร้างทีมงานอัจฉริยะทำงาน 24/7 ไร้ขีดจำกัด",
+      color: "from-rose-500 to-red-600",
+      border: "border-rose-500/30",
+      bg: "bg-rose-950/20",
+      text: "text-rose-400",
+    },
+  ];
+
   return (
-    <div className="max-w-5xl mx-auto py-8 sm:py-12 space-y-12 animate-fadeIn">
+    <div className="max-w-5xl mx-auto py-8 sm:py-12 space-y-14 animate-fadeIn">
       {/* 🌟 HERO MANIFESTO & VISION */}
       <div className="text-center space-y-4">
         <div className="inline-flex items-center space-x-2 text-xs font-semibold px-3.5 py-1.5 rounded-full bg-slate-800 text-sky-400 border border-slate-700 shadow-sm">
@@ -99,108 +167,133 @@ export default function HomeView({ fontSizes }) {
         })}
       </div>
 
-      {/* GOLDEN QUOTE BOX */}
-      <div className="minimal-card-inner rounded-2xl p-5 sm:p-6 border border-slate-800 text-center space-y-2 bg-[#060911]/80">
-        <span className="text-xs font-mono text-sky-400 uppercase tracking-wider block font-bold">
-          💡 สรุปสั้นๆ ให้เห็นภาพ
-        </span>
-        <p className="text-base sm:text-xl font-bold text-white leading-relaxed">
-          "AI ไม่ได้มาแทนคนเราหรอกครับ... แต่{" "}
-          <span className="text-sky-300 underline decoration-sky-500/50 underline-offset-4">
-            'คนที่ใช้ AI เป็น'
-          </span>{" "}
-          จะใช้ชีวิตและทำงานได้สบายกว่าคนที่ไม่ยอมแตะมันเลย"
-        </p>
+      {/* 🎯 INTERACTIVE HUB: QUIZ & ESSENTIAL TOOLS */}
+      <div className="space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
+          <div>
+            <span className="text-xs font-mono font-bold text-sky-400 uppercase tracking-wider block">
+              ⚡ กิจกรรมและเครื่องมือเสริมพลัง (Interactive Hub)
+            </span>
+            <h2 className="text-xl sm:text-2xl font-bold text-white">
+              ทดสอบระดับและลองใช้เครื่องมือประจำบ้าน
+            </h2>
+          </div>
+
+          {/* Tab Switcher */}
+          <div className="flex items-center space-x-1.5 bg-slate-900 p-1 rounded-xl border border-slate-800 overflow-x-auto custom-scrollbar">
+            <button
+              onClick={() => setActiveInteractiveTab("quiz")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center space-x-1.5 transition whitespace-nowrap ${
+                activeInteractiveTab === "quiz"
+                  ? "bg-sky-600 text-white shadow-sm"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>1. แบบทดสอบวัดระดับ</span>
+            </button>
+            <button
+              onClick={() => setActiveInteractiveTab("voice")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center space-x-1.5 transition whitespace-nowrap ${
+                activeInteractiveTab === "voice"
+                  ? "bg-rose-600 text-white shadow-sm"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              <Mic className="w-3.5 h-3.5" />
+              <span>2. โหมดคุยด้วยเสียง</span>
+            </button>
+            <button
+              onClick={() => setActiveInteractiveTab("tools")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center space-x-1.5 transition whitespace-nowrap ${
+                activeInteractiveTab === "tools"
+                  ? "bg-emerald-600 text-white shadow-sm"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              <Bot className="w-3.5 h-3.5" />
+              <span>3. แผนที่ AI Tools ฟรี</span>
+            </button>
+            <button
+              onClick={() => setActiveInteractiveTab("scam")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center space-x-1.5 transition whitespace-nowrap ${
+                activeInteractiveTab === "scam"
+                  ? "bg-amber-600 text-white shadow-sm"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              <ShieldAlert className="w-3.5 h-3.5" />
+              <span>4. ซ้อมจับมิจฉาชีพ</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Tab Content Display */}
+        <div className="animate-fadeIn">
+          {activeInteractiveTab === "quiz" && <AILevelQuiz />}
+          {activeInteractiveTab === "voice" && <VoiceModeGuide />}
+          {activeInteractiveTab === "tools" && <FamilyAITools />}
+          {activeInteractiveTab === "scam" && <ScamDefenseSimulator />}
+        </div>
       </div>
 
-      {/* 🚀 COURSE PILLARS & ROADMAP BANNER */}
-      <div className="minimal-card rounded-2xl p-6 border border-slate-800 space-y-4">
-        <div className="flex items-center justify-between flex-wrap gap-2 border-b border-slate-800 pb-3">
-          <div className="flex items-center space-x-2">
-            <Rocket className="w-5 h-5 text-emerald-400" />
-            <h3 className="text-base font-bold text-white">
-              4 หมวดการเรียนรู้ทีละสเต็ป (เข้าใจง่าย นำไปใช้ได้ทันที)
-            </h3>
-          </div>
-          <span className="text-xs font-mono text-slate-400 bg-slate-800 px-2.5 py-1 rounded">
-            เรียนรู้ตามจังหวะของตัวเอง
+      {/* 🚀 5 AI LEVELS SECTION */}
+      <div className="space-y-6">
+        <div className="text-center space-y-2 max-w-2xl mx-auto">
+          <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider block">
+            5 AI Levels Mastery
           </span>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3.5 text-xs">
-          <div className="p-4 rounded-xl bg-[#060911] border border-slate-800 space-y-1.5 flex flex-col justify-between">
-            <div className="space-y-1.5">
-              <span className="font-bold text-sky-400 block">
-                🌟 1. ปูพื้นฐาน 6 เรื่อง AI
-              </span>
-              <p className="text-slate-300 leading-relaxed">
-                ทำความเข้าใจ AI แบบเห็นภาพ รู้ว่าทำอะไรได้บ้าง เก่งแค่ไหน
-                และช่วยชีวิตจริงได้อย่างไร
-              </p>
-            </div>
-            <span className="text-[10px] font-mono text-slate-500 pt-2 border-t border-slate-800/80">
-              AI 360° Overview
-            </span>
-          </div>
-
-          <div className="p-4 rounded-xl bg-[#060911] border border-slate-800 space-y-1.5 flex flex-col justify-between">
-            <div className="space-y-1.5">
-              <span className="font-bold text-indigo-400 block">
-                🪜 2. บันได 5 ระดับ AI
-              </span>
-              <p className="text-slate-300 leading-relaxed">
-                ไต่ระดับจากถามตอบแทน Google ➡️ สูตร RTCF ➡️ สร้างผู้ช่วย ➡️
-                ทำหน้าเว็บ ➡️ ก้าวสู่ AI Agent
-              </p>
-            </div>
-            <span className="text-[10px] font-mono text-slate-500 pt-2 border-t border-slate-800/80">
-              5 AI Levels Ladder
-            </span>
-          </div>
-
-          <div className="p-4 rounded-xl bg-[#060911] border border-slate-800 space-y-1.5 flex flex-col justify-between">
-            <div className="space-y-1.5">
-              <span className="font-bold text-emerald-400 block">
-                💼 3. ปรับใช้จริงในชีวิต
-              </span>
-              <p className="text-slate-300 leading-relaxed">
-                ตัวอย่างใช้งานจริงในบ้าน การเรียน ติวลูกหลาน งานประจำ และสุขภาพ
-              </p>
-            </div>
-            <span className="text-[10px] font-mono text-slate-500 pt-2 border-t border-slate-800/80">
-              Real-Life Adaptation
-            </span>
-          </div>
-
-          <div className="p-4 rounded-xl bg-[#060911] border border-slate-800 space-y-1.5 flex flex-col justify-between">
-            <div className="space-y-1.5">
-              <span className="font-bold text-rose-400 block">
-                🏠 4. คลังความรู้ครอบครัว
-              </span>
-              <p className="text-slate-300 leading-relaxed">
-                รวมไอเดียดูแลสุขภาพ ป้องกันมิจฉาชีพ งานบ้าน จัดทริปเที่ยว
-                และติวลูกหลาน
-              </p>
-            </div>
-            <span className="text-[10px] font-mono text-slate-500 pt-2 border-t border-slate-800/80">
-              Family & Daily Life
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* 👥 CHOOSE ROLE SECTION */}
-      <div className="space-y-4 pt-2">
-        <div className="text-center space-y-1">
-          <h2 className="text-xl sm:text-2xl font-bold text-white">
-            เลือกหน้าที่ของคุณ เพื่อเริ่มเข้าสู่บทเรียน
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
+            บันได 5 ระดับ AI & สถิติประชากรโลก
           </h2>
-          <p className="text-xs sm:text-sm text-slate-400">
-            จะเปิดสอนคนอื่น หรือจะนั่งเรียนสบายๆ เลือกได้เลยครับ
+          <p className="text-xs sm:text-sm text-slate-300">
+            ยิ่งฝึกฝนจนก้าวข้ามแต่ละระดับ คุณจะยิ่งได้เปรียบคน 99% ของโลก
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-3 sm:gap-4">
+          {aiLevelsSummary.map((lvl, idx) => (
+            <div
+              key={idx}
+              className={`rounded-2xl p-4 sm:p-5 border ${lvl.border} ${lvl.bg} flex flex-col justify-between space-y-3 hover:border-slate-600 transition`}
+            >
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className={`text-xs font-mono font-bold ${lvl.text}`}>
+                    {lvl.level}
+                  </span>
+                  <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-slate-900 border border-slate-700 text-slate-300">
+                    {lvl.usagePercent}
+                  </span>
+                </div>
+                <h4 className="text-sm font-bold text-white leading-snug">
+                  {lvl.name}
+                </h4>
+                <p className="text-[11px] text-slate-400 italic">
+                  เปรียบเหมือน: {lvl.role}
+                </p>
+              </div>
+
+              <div className="pt-2 border-t border-slate-800/80 text-[11px] text-emerald-300/90 font-medium">
+                ⚡ พลังพิเศษ: {lvl.superpower}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 🧭 LEARNING MODES ENTRY CARDS */}
+      <div className="space-y-6">
+        <div className="text-center space-y-2 max-w-2xl mx-auto">
+          <span className="text-xs font-mono font-bold text-sky-400 uppercase tracking-wider block">
+            เลือกโหมดการเรียนรู้
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
+            พร้อมเริ่มใช้งานกันหรือยังครับ?
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Teacher Mode Card */}
           <Link
             to="/teacher"
@@ -212,31 +305,29 @@ export default function HomeView({ fontSizes }) {
 
               <div>
                 <span className="text-xs font-mono text-sky-400 font-semibold uppercase tracking-wider block mb-1">
-                  สำหรับคนสอน & พี่ติว
+                  สำหรับผู้สอน & วิทยากร
                 </span>
                 <h3 className="text-2xl font-bold text-white group-hover:text-sky-300 transition">
                   👨‍🏫 โหมดคนสอน (Teacher Mode)
                 </h3>
                 <p className="text-sm text-slate-400 mt-2 leading-relaxed">
-                  มีสไลด์ฉายขึ้นจอทีวี/โปรเจกเตอร์ 2 ชุด พร้อมบทพูดชวนคุยสนุกๆ
-                  และแนวทางช่วยน้องๆ เมื่อติดขัด
+                  มีไทม์ไลน์ 4 ชั่วโมง สไลด์บรรยาย จุดเช็กความเข้าใจผู้เรียน
+                  และบทพูดแนะนำสำหรับสอนคนในบ้าน
                 </p>
               </div>
 
               <ul className="text-xs text-slate-300 space-y-2 border-t border-slate-800 pt-4">
                 <li className="flex items-center space-x-2">
                   <span className="text-sky-400 font-bold">✓</span>
-                  <span>สไลด์สอนสด 6 เสาหลักความรู้ AI</span>
+                  <span>ตารางสอน 4 ชั่วโมงแบ่งช่วงพักชัดเจน</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <span className="text-sky-400 font-bold">✓</span>
-                  <span>
-                    สไลด์สอนสด บันได 5 ระดับ AI (กดลูกศรเปลี่ยนสไลด์ได้)
-                  </span>
+                  <span>สไลด์นำเสนอ & โพยผู้สอน (Presenter Notes)</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <span className="text-sky-400 font-bold">✓</span>
-                  <span>คู่มือปรับใช้จริง</span>
+                  <span>จุดตรวจความเข้าใจ (Checkpoints) พร้อมคำเฉลย</span>
                 </li>
               </ul>
             </div>
