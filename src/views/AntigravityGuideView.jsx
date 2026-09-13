@@ -36,6 +36,12 @@ import {
   FileText,
   MousePointerClick,
   Laptop,
+  Globe,
+  Server,
+  Network,
+  Cloud,
+  HardDrive,
+  Share2,
 } from "lucide-react";
 
 const NOCODE_PROJECT_TEMPLATES = [
@@ -307,6 +313,18 @@ export default function AntigravityGuideView({ fontSizes }) {
         >
           <Sliders className="w-4 h-4 text-rose-300" />
           <span>6. โพยสั่งแก้งาน</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab("deploy")}
+          className={`px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center space-x-1.5 transition whitespace-nowrap ${
+            activeTab === "deploy"
+              ? "bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-md font-extrabold"
+              : "text-amber-300 hover:text-white hover:bg-amber-950/50"
+          }`}
+        >
+          <Globe className="w-4 h-4 text-amber-300" />
+          <span>7. นำเว็บขึ้นออนไลน์ (GitHub & Vercel) 🌐</span>
         </button>
       </div>
 
@@ -925,6 +943,236 @@ export default function AntigravityGuideView({ fontSizes }) {
               <div className="flex items-start space-x-2">
                 <span className="text-emerald-400 font-bold">4.</span>
                 <span><strong>ไม่ต้องกลัวพัง</strong>: ถ้าผลลัพธ์ไม่ถูกใจ แค่พิมพ์บอกว่า "ยกเลิกการเปลี่ยนแปลงเมื่อกี้ แล้วทำแบบ..." ได้ตลอดเวลา</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* CHAPTER 7: DEPLOYING TO THE WORLD (GITHUB, VERCEL, DOMAIN, SERVER)        */}
+      {/* ========================================================================= */}
+      {activeTab === "deploy" && (
+        <div className="space-y-8 animate-fadeIn">
+          {/* Header */}
+          <div className="minimal-card rounded-3xl p-6 sm:p-8 border border-amber-500/30 bg-gradient-to-br from-[#181104] via-[#0f0c05] to-[#060502] space-y-4">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-xs font-semibold text-amber-300">
+              <Globe className="w-3.5 h-3.5" />
+              <span>บทที่ 7 • ส่งผลงานออกสู่สายตาชาวโลก (Deployment)</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
+              ขั้นตอนต่อไป: นำเว็บขึ้นอินเทอร์เน็ตจริง ให้คนทั้งโลกเข้าชมได้ 24 ชม.
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-3xl">
+              สร้างเว็บในเครื่องตัวเองเสร็จแล้ว ทำอย่างไรให้พ่อแม่ ญาติพี่น้อง หรือลูกค้าเปิดดูจากมือถือได้ทุกที่ทุกเวลา? 
+              มาทำความเข้าใจ <strong>Server, Domain, Network, GitHub และ Vercel</strong> ฉบับภาษาคนในบ้านกันครับ!
+            </p>
+          </div>
+
+          {/* 5 Core Terms Explained with Analogies */}
+          <div className="space-y-4">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
+              💡 5 คำศัพท์อินเทอร์เน็ต เข้าใจง่ายใน 1 นาที (เปรียบเทียบกับชีวิตจริง):
+            </span>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {/* 1. Server */}
+              <div className="minimal-card rounded-3xl p-5 border border-slate-800 space-y-3 bg-slate-900/90 flex flex-col justify-between">
+                <div className="space-y-2.5">
+                  <div className="flex items-center space-x-2.5">
+                    <div className="w-10 h-10 rounded-2xl bg-sky-950/60 border border-sky-500/30 flex items-center justify-center text-sky-400">
+                      <Server className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-base font-bold text-white">1. Server (เซิร์ฟเวอร์)</h4>
+                      <span className="text-[11px] text-sky-300">อาคารที่เปิดไฟ 24 ชม.</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    เปรียบเหมือน **"อาคารหรือบ้านที่เปิดไฟและเปิดประตูตลอด 24 ชั่วโมง"** มีหน้าที่เก็บไฟล์เว็บของเราไว้ เพื่อให้ใครก็ตามที่อยากดู สามารถแวะเข้ามาชมได้ตลอดเวลา โดยที่เราไม่ต้องเปิดคอมพิวเตอร์ตัวเองทิ้งไว้
+                  </p>
+                </div>
+                <div className="p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-[11px] text-slate-400">
+                  🏠 <em>ถ้าไม่มี Server คนอื่นจะเข้าดูเว็บเราไม่ได้ตอนเราปิดคอม</em>
+                </div>
+              </div>
+
+              {/* 2. Domain Name */}
+              <div className="minimal-card rounded-3xl p-5 border border-slate-800 space-y-3 bg-slate-900/90 flex flex-col justify-between">
+                <div className="space-y-2.5">
+                  <div className="flex items-center space-x-2.5">
+                    <div className="w-10 h-10 rounded-2xl bg-emerald-950/60 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                      <Globe className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-base font-bold text-white">2. Domain (ชื่อโดเมน)</h4>
+                      <span className="text-[11px] text-emerald-300">ป้ายชื่อบ้าน / ทะเบียนบ้าน</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    เปรียบเหมือน **"ป้ายชื่อร้านหรือที่อยู่บ้าน"** เช่น <code className="text-emerald-400">google.com</code> หรือ <code className="text-emerald-400">myshop.vercel.app</code> เพื่อให้คนจำง่ายและพิมพ์มาหาถูก แทนที่จะต้องจำเลขรหัส IP ตัวเลขยาวๆ (เช่น 192.168.1.1)
+                  </p>
+                </div>
+                <div className="p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-[11px] text-slate-400">
+                  🏷️ <em>เปรียบเหมือน: จำชื่อ "ร้านป้าสมศรี" ง่ายกว่าจำพิกัดละติจูด</em>
+                </div>
+              </div>
+
+              {/* 3. Network / Internet */}
+              <div className="minimal-card rounded-3xl p-5 border border-slate-800 space-y-3 bg-slate-900/90 flex flex-col justify-between">
+                <div className="space-y-2.5">
+                  <div className="flex items-center space-x-2.5">
+                    <div className="w-10 h-10 rounded-2xl bg-purple-950/60 border border-purple-500/30 flex items-center justify-center text-purple-400">
+                      <Network className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-base font-bold text-white">3. Network (เครือข่าย)</h4>
+                      <span className="text-[11px] text-purple-300">ถนนหนทางเชื่อมต่อโลก</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    เปรียบเหมือน **"ระบบถนน ไฮเวย์ และสายส่งสัญญาณ"** ที่เชื่อมโยงมือถือของทุกคน เข้ากับ Server ทั่วโลก ทำให้ข้อมูลและรูปภาพในเว็บวิ่งไปปรากฏบนหน้าจอมือถือของคนดูได้ในเสี้ยววินาที
+                  </p>
+                </div>
+                <div className="p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-[11px] text-slate-400">
+                  🛣️ <em>เปรียบเหมือน: ถนนที่รถส่งของวิ่งนำหน้าเว็บไปส่งที่มือถือ</em>
+                </div>
+              </div>
+
+              {/* 4. GitHub */}
+              <div className="minimal-card rounded-3xl p-5 border border-slate-800 space-y-3 bg-slate-900/90 flex flex-col justify-between">
+                <div className="space-y-2.5">
+                  <div className="flex items-center space-x-2.5">
+                    <div className="w-10 h-10 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center text-white">
+                      <Cloud className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-base font-bold text-white">4. GitHub (กิตฮับ)</h4>
+                      <span className="text-[11px] text-slate-300">ตู้เซฟเก็บโค้ด & ไทม์แมชชีน</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    เปรียบเหมือน **"ตู้เซฟฝากไฟล์บนก้อนเมฆ (Cloud)"** เก็บโค้ดทุกหน้าของเว็บเราไว้อย่างปลอดภัย ไม่ต้องกลัวคอมฯ พัง แถมจำประวัติการแก้ไขได้ทุกเวอร์ชัน ย้อนเวลากลับไปดูโค้ดเก่าได้เสมอ
+                  </p>
+                </div>
+                <div className="p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-[11px] text-slate-400">
+                  📦 <em>ฟรี ปลอดภัย เป็นมาตรฐานที่โปรแกรมเมอร์ทั่วโลกใช้</em>
+                </div>
+              </div>
+
+              {/* 5. Vercel */}
+              <div className="minimal-card rounded-3xl p-5 border border-amber-500/40 space-y-3 bg-amber-950/20 flex flex-col justify-between col-span-1 md:col-span-2 lg:col-span-2">
+                <div className="space-y-2.5">
+                  <div className="flex items-center space-x-2.5">
+                    <div className="w-10 h-10 rounded-2xl bg-amber-600/30 border border-amber-500/50 flex items-center justify-center text-amber-300">
+                      <Zap className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-base font-bold text-white">5. Vercel (เวอร์เซล)</h4>
+                      <span className="text-[11px] text-amber-300">ช่างรับเหมาเปิดเว็บอัตโนมัติฟรี ⚡</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-slate-200 leading-relaxed">
+                    เปรียบเหมือน **"ช่างรับเหมาก่อสร้างอัตโนมัติ"** ที่มี Server ฟรีให้เรายืมใช้! 
+                    หน้าที่ของ Vercel คือ **ไปหยิบโค้ดจากตู้เซฟ GitHub ของเรา มาประกอบร่างเป็นหน้าเว็บจริง แล้วเปิดให้คนทั่วโลกเข้าชมได้ทันทีใน 30 วินาที** แถมแจกลิงก์โดเมนฟรีให้อีกด้วย!
+                  </p>
+                </div>
+                <div className="p-2.5 rounded-xl bg-slate-950 border border-amber-500/30 text-[11px] text-amber-200 font-medium">
+                  ✨ <strong>ความมหัศจรรย์:</strong> เมื่อเชื่อม GitHub กับ Vercel แล้ว ทุกครั้งที่เราสั่ง Antigravity แก้ไขโค้ดแล้วส่งขึ้น GitHub ตัว Vercel จะอัปเดตหน้าเว็บจริงให้อัตโนมัติ 100% โดยที่เราไม่ต้องทำอะไรเพิ่มเลย!
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* How It All Connects Pipeline */}
+          <div className="minimal-card rounded-3xl p-6 sm:p-7 border border-slate-800 bg-slate-900/90 space-y-4">
+            <h3 className="text-base font-bold text-white flex items-center space-x-2">
+              <Sparkles className="w-5 h-5 text-amber-400" />
+              <span>สรุปแผนผังการเดินทาง: จากคอมพิวเตอร์ของคุณ สู่คนทั้งโลก</span>
+            </h3>
+
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs text-center">
+              <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
+                <span className="text-2xl block">💻</span>
+                <strong className="text-sky-400 block">1. คอมพิวเตอร์เรา</strong>
+                <p className="text-[11px] text-slate-400">Antigravity ช่วยเขียนโค้ดและทดสอบในเครื่อง</p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
+                <span className="text-2xl block">📦</span>
+                <strong className="text-purple-400 block">2. ส่งเข้า GitHub</strong>
+                <p className="text-[11px] text-slate-400">เก็บไฟล์โค้ดเข้าตู้เซฟออนไลน์ (Push to Main)</p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
+                <span className="text-2xl block">⚡</span>
+                <strong className="text-amber-400 block">3. Vercel รับช่วงต่อ</strong>
+                <p className="text-[11px] text-slate-400">ดึงโค้ดไปประกอบร่างและเปิดรันบน Server ทันที</p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-950 border border-emerald-500/40 space-y-1 bg-emerald-950/20">
+                <span className="text-2xl block">🎉</span>
+                <strong className="text-emerald-400 block">4. เว็บไซต์ออนไลน์!</strong>
+                <p className="text-[11px] text-slate-300">ได้ลิงก์ Domain ส่งให้คนทั้งโลกเปิดดูได้ 24 ชม.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* 3 Step Deployment Guide */}
+          <div className="minimal-card rounded-3xl p-6 sm:p-8 border border-slate-800 space-y-6">
+            <div className="space-y-2">
+              <span className="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider block">
+                วิธีลงมือทำจริง
+              </span>
+              <h3 className="text-xl sm:text-2xl font-bold text-white">
+                3 ขั้นตอนง่ายๆ นำโปรเจกต์ขึ้น Vercel (ทำครั้งเดียวจบ)
+              </h3>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-slate-300">
+              {/* Step 1 */}
+              <div className="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-3 flex flex-col justify-between">
+                <div className="space-y-2">
+                  <div className="w-8 h-8 rounded-xl bg-sky-600 text-white font-extrabold flex items-center justify-center text-sm">
+                    1
+                  </div>
+                  <h4 className="text-sm font-bold text-white">สั่ง Antigravity ส่งโค้ดขึ้น GitHub</h4>
+                  <p className="text-[11px] text-slate-400 leading-relaxed">
+                    แค่พิมพ์บอก Antigravity ในช่องแชทว่า: <br />
+                    <code className="text-sky-300 bg-slate-900 px-1 rounded">"ช่วย commit และ push โค้ดทั้งหมดขึ้น GitHub ให้หน่อย"</code>
+                  </p>
+                </div>
+                <span className="text-[11px] text-sky-400">✓ โค้ดทั้งหมดจะเข้าไปอยู่ในตู้เซฟ GitHub</span>
+              </div>
+
+              {/* Step 2 */}
+              <div className="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-3 flex flex-col justify-between">
+                <div className="space-y-2">
+                  <div className="w-8 h-8 rounded-xl bg-purple-600 text-white font-extrabold flex items-center justify-center text-sm">
+                    2
+                  </div>
+                  <h4 className="text-sm font-bold text-white">เปิดเว็บ Vercel แล้วกด Import</h4>
+                  <p className="text-[11px] text-slate-400 leading-relaxed">
+                    1. เข้าเว็บ <a href="https://vercel.com/new" target="_blank" rel="noreferrer" className="text-purple-400 underline">vercel.com/new</a> <br />
+                    2. ล็อกอินด้วยบัญชี GitHub <br />
+                    3. มองหาชื่อ Repository แล้วกดปุ่ม <strong>"Import"</strong>
+                  </p>
+                </div>
+                <span className="text-[11px] text-purple-400">✓ Vercel จะตรวจจับการตั้งค่าให้อัตโนมัติ</span>
+              </div>
+
+              {/* Step 3 */}
+              <div className="p-5 rounded-2xl bg-slate-950 border border-emerald-500/30 bg-emerald-950/20 space-y-3 flex flex-col justify-between">
+                <div className="space-y-2">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white font-extrabold flex items-center justify-center text-sm">
+                    3
+                  </div>
+                  <h4 className="text-sm font-bold text-white">กดปุ่ม Deploy & รับลิงก์ใช้งาน</h4>
+                  <p className="text-[11px] text-slate-300 leading-relaxed">
+                    กดปุ่มสีฟ้า <strong>"Deploy"</strong> รอระบบสร้างเว็บประมาณ 30 วินาที จะได้ลิงก์โดเมนจริง (เช่น <code className="text-emerald-300">my-app.vercel.app</code>) ส่งให้ทุกคนเปิดดูได้ทันที!
+                  </p>
+                </div>
+                <span className="text-[11px] text-emerald-400 font-bold">🎉 เสร็จสิ้น! ออนไลน์ฟรี 24 ชม.</span>
               </div>
             </div>
           </div>
