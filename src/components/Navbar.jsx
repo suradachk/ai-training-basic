@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import {
   Zap,
+  Rocket,
   GraduationCap,
   User,
   Clock,
@@ -80,6 +81,18 @@ export default function Navbar({
           >
             <User className="w-4 h-4" />
             <span>โหมดนักเรียน (Student)</span>
+          </Link>
+
+          <Link
+            to="/antigravity-guide"
+            className={`px-3.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition ${
+              currentPath === '/antigravity-guide'
+                ? 'bg-purple-600 text-white font-semibold shadow-sm'
+                : 'text-purple-300 hover:text-white hover:bg-purple-950/50'
+            }`}
+          >
+            <Rocket className="w-4 h-4 text-purple-400" />
+            <span>คู่มือ Antigravity (No-Code) 🚀</span>
           </Link>
         </div>
 

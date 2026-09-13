@@ -293,46 +293,41 @@ export default function HomeView({ fontSizes }) {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Teacher Mode Card */}
           <Link
             to="/teacher"
-            className="minimal-card rounded-3xl p-7 lg:p-8 hover:border-sky-500/70 transition flex flex-col justify-between group space-y-6">
+            className="minimal-card rounded-3xl p-6 lg:p-7 hover:border-sky-500/70 transition flex flex-col justify-between group space-y-5">
             <div className="space-y-4">
-              <div className="w-14 h-14 rounded-2xl bg-sky-950/60 border border-sky-500/30 flex items-center justify-center text-sky-400 group-hover:scale-105 transition">
-                <GraduationCap className="w-7 h-7" />
+              <div className="w-12 h-12 rounded-2xl bg-sky-950/60 border border-sky-500/30 flex items-center justify-center text-sky-400 group-hover:scale-105 transition">
+                <GraduationCap className="w-6 h-6" />
               </div>
 
               <div>
                 <span className="text-xs font-mono text-sky-400 font-semibold uppercase tracking-wider block mb-1">
                   สำหรับผู้สอน & วิทยากร
                 </span>
-                <h3 className="text-2xl font-bold text-white group-hover:text-sky-300 transition">
-                  👨‍🏫 โหมดคนสอน (Teacher Mode)
+                <h3 className="text-xl font-bold text-white group-hover:text-sky-300 transition">
+                  👨‍🏫 โหมดคนสอน (Teacher)
                 </h3>
-                <p className="text-sm text-slate-400 mt-2 leading-relaxed">
-                  มีไทม์ไลน์ 4 ชั่วโมง สไลด์บรรยาย จุดเช็กความเข้าใจผู้เรียน
-                  และบทพูดแนะนำสำหรับสอนคนในบ้าน
+                <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+                  มีไทม์ไลน์ 4 ชั่วโมง สไลด์บรรยาย จุดเช็กความเข้าใจผู้เรียน และบทพูดแนะนำ
                 </p>
               </div>
 
               <ul className="text-xs text-slate-300 space-y-2 border-t border-slate-800 pt-4">
                 <li className="flex items-center space-x-2">
                   <span className="text-sky-400 font-bold">✓</span>
-                  <span>ตารางสอน 4 ชั่วโมงแบ่งช่วงพักชัดเจน</span>
+                  <span>ตารางสอน 4 ชม. แบ่งช่วงพักชัดเจน</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <span className="text-sky-400 font-bold">✓</span>
-                  <span>สไลด์นำเสนอ & โพยผู้สอน (Presenter Notes)</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <span className="text-sky-400 font-bold">✓</span>
-                  <span>จุดตรวจความเข้าใจ (Checkpoints) พร้อมคำเฉลย</span>
+                  <span>สไลด์นำเสนอ & โพยผู้สอน</span>
                 </li>
               </ul>
             </div>
 
-            <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-sky-400 text-sm font-bold">
+            <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-sky-400 text-xs font-bold">
               <span>เปิดโหมดคนสอน</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
             </div>
@@ -341,45 +336,77 @@ export default function HomeView({ fontSizes }) {
           {/* Student Mode Card */}
           <Link
             to="/student"
-            className="minimal-card rounded-3xl p-7 lg:p-8 hover:border-emerald-500/70 transition flex flex-col justify-between group space-y-6">
+            className="minimal-card rounded-3xl p-6 lg:p-7 hover:border-emerald-500/70 transition flex flex-col justify-between group space-y-5">
             <div className="space-y-4">
-              <div className="w-14 h-14 rounded-2xl bg-emerald-950/60 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition">
-                <User className="w-7 h-7" />
+              <div className="w-12 h-12 rounded-2xl bg-emerald-950/60 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition">
+                <User className="w-6 h-6" />
               </div>
 
               <div>
                 <span className="text-xs font-mono text-emerald-400 font-semibold uppercase tracking-wider block mb-1">
-                  สำหรับคนเรียน & ทุกคนในบ้าน
+                  สำหรับคนเรียน & ครอบครัว
                 </span>
-                <h3 className="text-2xl font-bold text-white group-hover:text-emerald-300 transition">
-                  🎓 โหมดคนเรียน (Student Mode)
+                <h3 className="text-xl font-bold text-white group-hover:text-emerald-300 transition">
+                  🎓 โหมดคนเรียน (Student)
                 </h3>
-                <p className="text-sm text-slate-400 mt-2 leading-relaxed">
-                  สรุปเนื้อหาอ่านง่าย มีบันได 5 ระดับ AI พร้อมเครื่องมือสร้าง
-                  Prompt คลังคำสั่ง และไอเดียสร้างรายได้
+                <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+                  สรุปเนื้อหา 6 เสาหลัก บันได 5 ระดับ AI และคลังสูตรคำสั่ง RTCF พร้อมใช้
                 </p>
               </div>
 
               <ul className="text-xs text-slate-300 space-y-2 border-t border-slate-800 pt-4">
                 <li className="flex items-center space-x-2">
                   <span className="text-emerald-400 font-bold">✓</span>
-                  <span>อ่านสรุป 6 เสาหลัก & บันได 5 ระดับ AI</span>
+                  <span>บันได 5 ระดับ & สร้างเลขา AI</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <span className="text-emerald-400 font-bold">✓</span>
-                  <span>
-                    เครื่องมือสร้าง Prompt (RTCF) & คลังคำสั่งพร้อมก๊อปปี้
-                  </span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <span className="text-emerald-400 font-bold">✓</span>
-                  <span>แนวทางปรับใช้ในชีวิตจริง & 6 ช่องทางหาเงิน</span>
+                  <span>เครื่องมือสร้าง Prompt & คลังคำสั่ง</span>
                 </li>
               </ul>
             </div>
 
-            <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-emerald-400 text-sm font-bold">
+            <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-emerald-400 text-xs font-bold">
               <span>เปิดโหมดคนเรียน</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
+            </div>
+          </Link>
+
+          {/* Antigravity Guide No-Code Card */}
+          <Link
+            to="/antigravity-guide"
+            className="minimal-card rounded-3xl p-6 lg:p-7 hover:border-purple-500/70 transition flex flex-col justify-between group space-y-5 bg-gradient-to-br from-[#0e1222] via-[#0b0f1c] to-[#080a14]">
+            <div className="space-y-4">
+              <div className="w-12 h-12 rounded-2xl bg-purple-950/60 border border-purple-500/30 flex items-center justify-center text-purple-400 group-hover:scale-105 transition">
+                <Rocket className="w-6 h-6" />
+              </div>
+
+              <div>
+                <span className="text-xs font-mono text-purple-400 font-semibold uppercase tracking-wider block mb-1">
+                  คู่มือสร้างเว็บฉบับ No-Code
+                </span>
+                <h3 className="text-xl font-bold text-white group-hover:text-purple-300 transition">
+                  🚀 สั่งทำเว็บด้วย Antigravity
+                </h3>
+                <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+                  มีทีมโปรแกรมเมอร์ส่วนตัว สั่งภาษาไทยเนรมิตเว็บร้านค้า บันทึกรายรับจ่าย
+                </p>
+              </div>
+
+              <ul className="text-xs text-slate-300 space-y-2 border-t border-slate-800 pt-4">
+                <li className="flex items-center space-x-2">
+                  <span className="text-purple-400 font-bold">✓</span>
+                  <span>5 ไอเดียโปรเจกต์พร้อมคำสั่งสำเร็จรูป</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <span className="text-purple-400 font-bold">✓</span>
+                  <span>โพยสั่งแก้งาน & กฎทอง 4 ข้อ</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-purple-400 text-xs font-bold">
+              <span>เปิดคู่มือ Antigravity</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
             </div>
           </Link>

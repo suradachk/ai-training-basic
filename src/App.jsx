@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import HomeView from './views/HomeView'
 import TeacherView from './views/TeacherView'
 import StudentView from './views/StudentView'
+import AntigravityGuideView from './views/AntigravityGuideView'
 
 export default function App() {
   const [timerSeconds, setTimerSeconds] = useState(120 * 60) // 2 hours
@@ -50,6 +51,7 @@ export default function App() {
             <Route path="/" element={<HomeView fontSizes={fontSizes} />} />
             <Route path="/teacher" element={<TeacherView fontSizes={fontSizes} />} />
             <Route path="/student" element={<StudentView fontSizes={fontSizes} />} />
+            <Route path="/antigravity-guide" element={<AntigravityGuideView fontSizes={fontSizes} />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
